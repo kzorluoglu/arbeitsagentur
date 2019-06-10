@@ -1,0 +1,19 @@
+{
+    "name": "kzorluoglu/arbeitsagentur",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "^8.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Koray Zorluoglu",
+            "email": "koray@d8devs.com"
+        }
+    ],
+    "autoload" : {
+        "psr-4" : {
+            "kzorluoglu\\Arbeitsagentur\\" : "src/"
+        }
+    }
+}
