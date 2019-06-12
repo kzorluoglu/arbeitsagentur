@@ -100,8 +100,8 @@ composer require kzorluoglu/arbeitsagentur
 - JobService Class
     - Upload Method Implementing, like setRemote(RemoteInterface $remote)->upload()
         - ```
-          curl --cert Zertifikat-<id>.pem[:pem_passwort] -F upload=@<Pfad_zur_Datei>\DS<Partnernummer>_<Zeitstempel>.XML
-        https://hrbaxml.arbeitsagentur.de/in/upload.php```
+          curl --cert Zertifikat-<id>.pem[:pem_passwort] -F upload=@<Pfad_zur_Datei>\DS<Partnernummer>_<Zeitstempel>.XML https://hrbaxml.arbeitsagentur.de/in/upload.php
+        ```
      - setRemote(new Arbeitsagentur)
      - upload()
 

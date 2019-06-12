@@ -2,13 +2,17 @@
 namespace kzorluoglu\Arbeitsagentur\Service;
 
 use kzorluoglu\Arbeitsagentur\Contract\JobInterface;
-use kzorluoglu\Arbeitsagentur\XMLJob;
 
 class JobService
 {
-    public function __construct(JobInterface $job)
-    {
+
+    public function __construct(JobInterface $job){
         $this->job = $job;
+    }
+
+    public function isValidRequest()
+    {
+        return $this->job->isValidRequest();
     }
 
     public function generate()

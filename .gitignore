@@ -1,4 +1,13 @@
 .idea
 .phpunit.result.cache
+.env
+
+# Composer
 /vendor
 composer.lock
+
+# Temp
+/tmp
+
+# Certificate
+certiface.pem

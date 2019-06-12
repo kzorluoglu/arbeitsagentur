@@ -81,18 +81,27 @@ class JobTest extends TestCase
         $job->NumberToFill = '1';
         $job->AssignmentStartDate = new \DateTime();
         $job->AssignmentEndDate = new \DateTime();
+
         return $job;
     }
+
+
 
     public function testExportXML()
     {
         $xmlJob = new XMLJob($this->getJob());
         $this->jobService = new JobService($xmlJob);
-
         $jobs = $this->jobService->generate();
         $generatedXMLFile = $xmlJob->getXML();
 
         $this->assertSame($jobs->getAll(), $generatedXMLFile);
+    }
+
+    public function testXMLJobPrepare()
+    {
+        $xmlJob = new XMLJob($this->getJob());
+        $this->jobService = new JobService($xmlJob);
+        $this->assertTrue($this->jobService->isValidRequest());
     }
 
 

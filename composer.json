@@ -2,7 +2,8 @@
     "name": "kzorluoglu/arbeitsagentur",
     "type": "project",
     "require": {
-        "phpunit/phpunit": "^8.2"
+        "phpunit/phpunit": "^8.2",
+        "vlucas/phpdotenv": "^3.3"
     },
     "license": "MIT",
     "authors": [

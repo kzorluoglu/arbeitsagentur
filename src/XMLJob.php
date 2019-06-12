@@ -4,10 +4,11 @@ namespace kzorluoglu\Arbeitsagentur;
 
 
 use kzorluoglu\Arbeitsagentur\Contract\JobInterface;
+use kzorluoglu\Arbeitsagentur\Contract\RemoteInterface;
 
-class XMLJob implements JobInterface
+class XMLJob extends Company implements JobInterface
 {
-    private $filePath = 'C:\Users\kzorluoglu\PhpstormProjects\ArbeitsagenturAPI';
+    private $filePath = 'C:\Users\kzorluoglu\PhpstormProjects\ArbeitsagenturAPI\tmp';
     private $fileFullPath;
     private $job;
 
@@ -15,6 +16,20 @@ class XMLJob implements JobInterface
     {
         $this->job = $job;
         $this->fileFullPath = $this->filePath . '\test.xml';
+    }
+
+    public function isValidRequest(){
+
+        if(!$this->certificateValid()){
+            return false;
+        }
+
+        if(!$this->companyCredentialsValid()){
+            return false;
+        }
+
+        return true;
+
     }
 
     public function generateXMLFile()
@@ -283,5 +298,28 @@ class XMLJob implements JobInterface
     public function getXML()
     {
         return file_exists($this->fileFullPath) ? file_get_contents($this->fileFullPath) : 'null';
+    }
+
+    private function certificateValid()
+    {
+        return file_exists($this->getCertificateFile());
+    }
+
+    private function companyCredentialsValid()
+    {
+        if(empty($this->getCompanyName())){
+            throw new \Exception('Company Name is empty');
+            return false;
+        }
+        if(empty($this->getSupplierID())){
+            throw new \Exception('SupplierID is empty');
+        }
+        if(empty($this->getAllianzpartnerNumber())){
+            throw new \Exception('Allianzpartner Number Name is empty');
+        }
+        if(empty($this->getPIN())){
+            throw new \Exception('PIN is empty');
+        }
+        return true;
     }
 }
