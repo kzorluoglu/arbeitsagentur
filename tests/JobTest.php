@@ -104,5 +104,18 @@ class JobTest extends TestCase
         $this->assertTrue($this->jobService->isValidRequest());
     }
 
+    /**
+     * Test Upload Not Possible...
+     */
+    public function testXMLJobUpload(){
+
+        $xmlJob = new XMLJob($this->getJob());
+        $this->jobService = new JobService($xmlJob);
+
+        $status = $this->jobService->upload();
+
+        $this->assertSame( $status, 'Test');
+    }
+
 
 }

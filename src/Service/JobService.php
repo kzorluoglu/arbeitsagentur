@@ -6,6 +6,10 @@ use kzorluoglu\Arbeitsagentur\Contract\JobInterface;
 class JobService
 {
 
+    /**
+     * JobService constructor.
+     * @param JobInterface $job
+     */
     public function __construct(JobInterface $job){
         $this->job = $job;
     }
@@ -29,6 +33,11 @@ class JobService
     public function importAll()
     {
         // TODO: Implement importAll() method.
+    }
+
+    public function upload()
+    {
+        return $this->job->upload();
     }
 
 

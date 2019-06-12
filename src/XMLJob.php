@@ -302,7 +302,10 @@ class XMLJob extends Company implements JobInterface
 
     private function certificateValid()
     {
-        return file_exists($this->getCertificateFile());
+        if(!file_exists($this->getCertificateFile())){
+            throw new \Exception('Certificate File not exists');
+        }
+        return true;
     }
 
     private function companyCredentialsValid()
@@ -321,5 +324,25 @@ class XMLJob extends Company implements JobInterface
             throw new \Exception('PIN is empty');
         }
         return true;
+    }
+
+    public function upload()
+    {
+        $url = getenv('HRBAXML_UPLOAD_URL').'?upload='.$this->getFileFullPath();
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        // The --cert option
+        curl_setopt($ch, CURLOPT_SSLCERT, $this->getCertificateFile());
+        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->getPIN());
+        $result  = curl_exec($ch);
+        // also get the error and response code
+        $errors = curl_error($ch);
+        $response = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if(isset($errors)){
+            return $errors;
+        }
+        return $response;
     }
 }
