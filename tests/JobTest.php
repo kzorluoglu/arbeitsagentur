@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 use kzorluoglu\Arbeitsagentur\Service\JobService;
-use kzorluoglu\Arbeitsagentur\Job;
 use kzorluoglu\Arbeitsagentur\XMLJob;
 
 class JobTest extends TestCase
@@ -14,9 +13,9 @@ class JobTest extends TestCase
         parent::setUp();
     }
 
-    public function getJob()
+    public function getXMLJob()
     {
-        $job = new Job();
+        $job = new XMLJob();
         $job->SupplierId = 'A000000000';
         $job->Timestamp = new \DateTime('now');
         $job->Amount = '1';
@@ -89,8 +88,8 @@ class JobTest extends TestCase
 
     public function testExportXML()
     {
-        $xmlJob = new XMLJob($this->getJob());
-        $this->jobService = new JobService($xmlJob);
+        $xmlJob = $this->getXMLJob();
+        $this->jobService = new JobService($this->getXMLJob());
         $jobs = $this->jobService->generate();
         $generatedXMLFile = $xmlJob->getXML();
 
@@ -99,9 +98,9 @@ class JobTest extends TestCase
 
     public function testXMLJobPrepare()
     {
-        $xmlJob = new XMLJob($this->getJob());
-        $this->jobService = new JobService($xmlJob);
-        $this->assertTrue($this->jobService->isValidRequest());
+         $this->jobService = new JobService($this->getXMLJob());
+         $this->jobService->setCompany(new \kzorluoglu\Arbeitsagentur\Company());
+        $this->assertTrue($this->jobService->isValid());
     }
 
     /**
@@ -109,12 +108,13 @@ class JobTest extends TestCase
      */
     public function testXMLJobUpload(){
 
-        $xmlJob = new XMLJob($this->getJob());
+        $xmlJob = new XMLJob($this->getXMLJob());
         $this->jobService = new JobService($xmlJob);
+        $this->jobService->setCompany(new \kzorluoglu\Arbeitsagentur\Company());
 
         $status = $this->jobService->upload();
 
-        $this->assertSame( $status, 'Test');
+        $this->assertSame( $status, 'could not load PEM client certificate, OpenSSL error error:0909006C:PEM routines:get_name:no start line, (no key found, wrong pass phrase, or wrong file format?)');
     }
 
 

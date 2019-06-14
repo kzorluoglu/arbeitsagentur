@@ -1,10 +1,13 @@
 <?php
 namespace kzorluoglu\Arbeitsagentur\Service;
 
+use kzorluoglu\Arbeitsagentur\Company;
 use kzorluoglu\Arbeitsagentur\Contract\JobInterface;
 
 class JobService
 {
+    /** @var Company $company */
+    private $company;
 
     /**
      * JobService constructor.
@@ -14,9 +17,18 @@ class JobService
         $this->job = $job;
     }
 
-    public function isValidRequest()
+    /**
+     * @param Company $company
+     */
+    public function setCompany(Company $company): void
     {
-        return $this->job->isValidRequest();
+        $this->company = $company;
+        return;
+    }
+
+    public function isValid()
+    {
+         return $this->company->isValid();
     }
 
     public function generate()
@@ -37,7 +49,22 @@ class JobService
 
     public function upload()
     {
-        return $this->job->upload();
+        $url = getenv('HRBAXML_UPLOAD_URL').'?upload='.$this->job->getFileFullPath();
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        // The --cert option
+        curl_setopt($ch, CURLOPT_SSLCERT, $this->company->getCertificateFile());
+        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->company->getPIN());
+        $result  = curl_exec($ch);
+        // also get the error and response code
+        $errors = curl_error($ch);
+        $response = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if(isset($errors)){
+            return $errors;
+        }
+        return $response;
     }
 
 

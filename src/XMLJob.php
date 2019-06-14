@@ -6,15 +6,12 @@ namespace kzorluoglu\Arbeitsagentur;
 use kzorluoglu\Arbeitsagentur\Contract\JobInterface;
 use kzorluoglu\Arbeitsagentur\Contract\RemoteInterface;
 
-class XMLJob extends Company implements JobInterface
+class XMLJob extends Job implements JobInterface
 {
     private $filePath = 'C:\Users\kzorluoglu\PhpstormProjects\ArbeitsagenturAPI\tmp';
     private $fileFullPath;
-    private $job;
-
-    public function __construct(Job $job)
+    public function __construct()
     {
-        $this->job = $job;
         $this->fileFullPath = $this->filePath . '\test.xml';
     }
 
@@ -59,28 +56,28 @@ class XMLJob extends Company implements JobInterface
 
         $JobPositionPosting = $xmlTree->createElement('JobPositionPosting');
 
-        $JobPositionPostingId = $xmlTree->createElement('JobPositionPostingId', $this->job->JobPositionPostingId);
+        $JobPositionPostingId = $xmlTree->createElement('JobPositionPostingId', $this->PositionPostingId);
         $JobPositionPosting->appendChild($JobPositionPostingId);
 
         /** PostDetail START */
         $PostDetail = $xmlTree->createElement('PostDetail');
 
-        $StartDate = $xmlTree->createElement('StartDate', $this->job->StartDate->format('Y-m-dTH:m:sZ'));
+        $StartDate = $xmlTree->createElement('StartDate', $this->StartDate->format('Y-m-dTH:m:sZ'));
         $PostDetail->appendChild($StartDate);
 
-        $EndDate = $xmlTree->createElement('EndDate', $this->job->EndDate->format('Y-m-dTH:m:sZ'));
+        $EndDate = $xmlTree->createElement('EndDate', $this->EndDate->format('Y-m-dTH:m:sZ'));
         $PostDetail->appendChild($EndDate);
 
-        $Status = $xmlTree->createElement('Status', $this->job->Status);
+        $Status = $xmlTree->createElement('Status', $this->Status);
         $PostDetail->appendChild($Status);
 
-        $SupplierId = $xmlTree->createElement('SupplierId', $this->job->SupplierId);
+        $SupplierId = $xmlTree->createElement('SupplierId', $this->SupplierId);
         $PostDetail->appendChild($SupplierId);
 
-        $SupplierName = $xmlTree->createElement('SupplierName', $this->job->SupplierId);
+        $SupplierName = $xmlTree->createElement('SupplierName', $this->SupplierId);
         $PostDetail->appendChild($SupplierName);
 
-        $SupplierIndustrie = $xmlTree->createElement('SupplierIndustrie', $this->job->SupplierIndustrie);
+        $SupplierIndustrie = $xmlTree->createElement('SupplierIndustrie', $this->SupplierIndustrie);
         $PostDetail->appendChild($SupplierIndustrie);
 
         $JobPositionPosting->appendChild($PostDetail);
@@ -93,10 +90,10 @@ class XMLJob extends Company implements JobInterface
         $JobPositionTitle = $xmlTree->createElement('JobPositionTitle');
         $JobPositionInformation->appendChild($JobPositionTitle);
 
-        $TitleCode = $xmlTree->createElement('TitleCode', $this->job->JobPositionTitle->TitleCode);
+        $TitleCode = $xmlTree->createElement('TitleCode', $this->JobPositionTitle->TitleCode);
         $JobPositionTitle->appendChild($TitleCode);
 
-        $Degree = $xmlTree->createElement('Degree', $this->job->JobPositionTitle->Degree);
+        $Degree = $xmlTree->createElement('Degree', $this->JobPositionTitle->Degree);
         $JobPositionTitle->appendChild($Degree);
         $JobPositionInformation->appendChild($JobPositionTitle);
 
@@ -104,21 +101,21 @@ class XMLJob extends Company implements JobInterface
         /**  AlternativeJobPositionTitle  Start */
         $AlternativeJobPositionTitle = $xmlTree->createElement('AlternativeJobPositionTitle');
 
-        $TitleCode = $xmlTree->createElement('TitleCode', $this->job->AlternativeJobPositionTitle->TitleCode);
+        $TitleCode = $xmlTree->createElement('TitleCode', $this->AlternativeJobPositionTitle->TitleCode);
         $AlternativeJobPositionTitle->appendChild($TitleCode);
 
-        $Degree = $xmlTree->createElement('Degree', $this->job->AlternativeJobPositionTitle->Degree);
+        $Degree = $xmlTree->createElement('Degree', $this->AlternativeJobPositionTitle->Degree);
         $AlternativeJobPositionTitle->appendChild($Degree);
         $JobPositionInformation->appendChild($AlternativeJobPositionTitle);
         /**  JobPositionTitle  End */
 
-        $JobPositionTitleDescription = $xmlTree->createElement('JobPositionTitleDescription', $this->job->JobPositionTitleDescription);
+        $JobPositionTitleDescription = $xmlTree->createElement('JobPositionTitleDescription', $this->JobPositionTitleDescription);
         $JobPositionInformation->appendChild($JobPositionTitleDescription);
 
-        $JobOfferType = $xmlTree->createElement('JobOfferType', $this->job->JobOfferType);
+        $JobOfferType = $xmlTree->createElement('JobOfferType', $this->JobOfferType);
         $JobPositionInformation->appendChild($JobOfferType);
 
-        $SocialInsurance = $xmlTree->createElement('SocialInsurance', $this->job->SocialInsurance);
+        $SocialInsurance = $xmlTree->createElement('SocialInsurance', $this->SocialInsurance);
         $JobPositionInformation->appendChild($SocialInsurance);
 
         /** JobPositionDescription Start **/
@@ -127,44 +124,44 @@ class XMLJob extends Company implements JobInterface
         $JobPositionDescription->appendChild($JobPositionLocation);
         $Location = $xmlTree->createElement('Location');
         $JobPositionLocation->appendChild($Location);
-        $CountryCode = $xmlTree->createElement('CountryCode', $this->job->CountryCode);
+        $CountryCode = $xmlTree->createElement('CountryCode', $this->CountryCode);
         $Location->appendChild($CountryCode);
-        $PostalCode = $xmlTree->createElement('PostalCode', $this->job->PostalCode);
+        $PostalCode = $xmlTree->createElement('PostalCode', $this->PostalCode);
         $Location->appendChild($PostalCode);
-        $Region = $xmlTree->createElement('Region', $this->job->Region);
+        $Region = $xmlTree->createElement('Region', $this->Region);
         $Location->appendChild($Region);
-        $AddressLine = $xmlTree->createElement('AddressLine', $this->job->AddressLine);
+        $AddressLine = $xmlTree->createElement('AddressLine', $this->AddressLine);
         $Location->appendChild($AddressLine);
-        $StreetName = $xmlTree->createElement('StreetName', $this->job->StreetName);
+        $StreetName = $xmlTree->createElement('StreetName', $this->StreetName);
         $Location->appendChild($StreetName);
         $JobPositionInformation->appendChild($JobPositionDescription);
 
         $Application = $xmlTree->createElement('Application');
-          $ApplicationStartDate = $xmlTree->createElement('ApplicationStartDate', $this->job->ApplicationStartDate->format('Y-m-dTH:m:sZ'));
+          $ApplicationStartDate = $xmlTree->createElement('ApplicationStartDate', $this->ApplicationStartDate->format('Y-m-dTH:m:sZ'));
         $Application->appendChild($ApplicationStartDate);
-        $ApplicationEndDate = $xmlTree->createElement('ApplicationEndDate', $this->job->ApplicationEndDate->format('Y-m-dTH:m:sZ'));
+        $ApplicationEndDate = $xmlTree->createElement('ApplicationEndDate', $this->ApplicationEndDate->format('Y-m-dTH:m:sZ'));
         $Application->appendChild($ApplicationEndDate);
         $JobPositionDescription->appendChild($Application);
 
-        $Leadership = $xmlTree->createElement('Leadership', $this->job->Leadership);
+        $Leadership = $xmlTree->createElement('Leadership', $this->Leadership);
         $JobPositionDescription->appendChild($Leadership);
 
-        $MiniJob = $xmlTree->createElement('MiniJob', $this->job->MiniJob);
+        $MiniJob = $xmlTree->createElement('MiniJob', $this->MiniJob);
         $JobPositionDescription->appendChild($MiniJob);
 
         $Classification = $xmlTree->createElement('Classification');
         $Duration = $xmlTree->createElement('Duration');
-        $TermLength = $xmlTree->createElement('TermLength', $this->job->TermLength);
+        $TermLength = $xmlTree->createElement('TermLength', $this->TermLength);
         $Duration->appendChild($TermLength);
-        $TermDate = $xmlTree->createElement('TermDate', $this->job->TermDate->format('Y-m-dTH:m:sZ'));
+        $TermDate = $xmlTree->createElement('TermDate', $this->TermDate->format('Y-m-dTH:m:sZ'));
         $Duration->appendChild($ApplicationStartDate);
-        $TemporaryOrRegular = $xmlTree->createElement('TemporaryOrRegular', $this->job->TemporaryOrRegular);
+        $TemporaryOrRegular = $xmlTree->createElement('TemporaryOrRegular', $this->TemporaryOrRegular);
         $Duration->appendChild($TemporaryOrRegular);
         $Classification->appendChild($Duration);
         $JobPositionDescription->appendChild($Classification);
 
         $CompensationDescription = $xmlTree->createElement('CompensationDescription');
-        $Salary = $xmlTree->createElement('Salary', $this->job->Salary);
+        $Salary = $xmlTree->createElement('Salary', $this->Salary);
         $CompensationDescription->appendChild($Salary);
 
         $JobPositionDescription->appendChild($CompensationDescription);
@@ -176,65 +173,65 @@ class XMLJob extends Company implements JobInterface
         $JobPositionRequirements->appendChild($QualificationsRequired);
         $EducationQualifs = $xmlTree->createElement('EducationQualifs');
         $QualificationsRequired->appendChild($EducationQualifs);
-        $EduDegree = $xmlTree->createElement('EduDegree', $this->job->EducationQualifs->EduDegree);
+        $EduDegree = $xmlTree->createElement('EduDegree', $this->EducationQualifs->EduDegree);
         $EducationQualifs->appendChild($EduDegree);
-        $EduDegreeRequired = $xmlTree->createElement('EduDegreeRequired', $this->job->EducationQualifs->EduDegreeRequired);
+        $EduDegreeRequired = $xmlTree->createElement('EduDegreeRequired', $this->EducationQualifs->EduDegreeRequired);
         $EducationQualifs->appendChild($EduDegreeRequired);
         $ManagementQualifs = $xmlTree->createElement('ManagementQualifs');
         $QualificationsRequired->appendChild($ManagementQualifs);
-        $LeadershipType = $xmlTree->createElement('LeadershipType', $this->job->ManagementQualifs->LeadershipType);
+        $LeadershipType = $xmlTree->createElement('LeadershipType', $this->ManagementQualifs->LeadershipType);
         $ManagementQualifs->appendChild($LeadershipType);
-        $Authority = $xmlTree->createElement('Authority', $this->job->ManagementQualifs->Authority);
+        $Authority = $xmlTree->createElement('Authority', $this->ManagementQualifs->Authority);
         $ManagementQualifs->appendChild($Authority);
-        $LeadershipEx = $xmlTree->createElement('LeadershipEx', $this->job->ManagementQualifs->LeadershipEx);
+        $LeadershipEx = $xmlTree->createElement('LeadershipEx', $this->ManagementQualifs->LeadershipEx);
         $ManagementQualifs->appendChild($LeadershipEx);
-        $BudgetResp = $xmlTree->createElement('BudgetResp', $this->job->ManagementQualifs->BudgetResp);
+        $BudgetResp = $xmlTree->createElement('BudgetResp', $this->ManagementQualifs->BudgetResp);
         $ManagementQualifs->appendChild($BudgetResp);
-        $EmployeeResp = $xmlTree->createElement('EmployeeResp', $this->job->ManagementQualifs->EmployeeResp);
+        $EmployeeResp = $xmlTree->createElement('EmployeeResp', $this->ManagementQualifs->EmployeeResp);
         $ManagementQualifs->appendChild($EmployeeResp);
 
         $LanguageQualifs = $xmlTree->createElement('LanguageQualifs');
         $QualificationsRequired->appendChild($LanguageQualifs);
         $Language = $xmlTree->createElement('Language');
         $LanguageQualifs->appendChild($Language);
-        $LanguageName = $xmlTree->createElement('LanguageName', $this->job->Language->LanguageName);
+        $LanguageName = $xmlTree->createElement('LanguageName', $this->Language->LanguageName);
         $Language->appendChild($LanguageName);
-        $LanguageLevel = $xmlTree->createElement('LanguageLevel', $this->job->Language->LanguageLevel);
+        $LanguageLevel = $xmlTree->createElement('LanguageLevel', $this->Language->LanguageLevel);
         $Language->appendChild($LanguageLevel);
         $SkillQualifs = $xmlTree->createElement('SkillQualifs');
         $QualificationsRequired->appendChild($SkillQualifs);
         $HardSkill = $xmlTree->createElement('HardSkill');
         $SkillQualifs->appendChild($HardSkill);
 
-        $SkillName = $xmlTree->createElement('SkillName',  $this->job->HardSkill->SkillName);
+        $SkillName = $xmlTree->createElement('SkillName',  $this->HardSkill->SkillName);
         $HardSkill->appendChild($SkillName);
-        $SkillLevel = $xmlTree->createElement('SkillLevel', $this->job->HardSkill->SkillLevel);
+        $SkillLevel = $xmlTree->createElement('SkillLevel', $this->HardSkill->SkillLevel);
         $HardSkill->appendChild($SkillLevel);
         $SoftSkill = $xmlTree->createElement('SoftSkill');
         $SkillQualifs->appendChild($SoftSkill);
-        $SkillName = $xmlTree->createElement('SkillName', $this->job->SoftSkill->SkillLevel);
+        $SkillName = $xmlTree->createElement('SkillName', $this->SoftSkill->SkillLevel);
         $SoftSkill->appendChild($SkillName);
 
         $Mobility = $xmlTree->createElement('Mobility');
         $QualificationsRequired->appendChild($Mobility);
 
-        $DrivingLicence = $xmlTree->createElement('DrivingLicence', $this->job->DrivingLicence);
+        $DrivingLicence = $xmlTree->createElement('DrivingLicence', $this->DrivingLicence);
         $Mobility->appendChild($DrivingLicence);
-        $DrivingLicenceRequired = $xmlTree->createElement('DrivingLicenceRequired', $this->job->DrivingLicenceRequired);
+        $DrivingLicenceRequired = $xmlTree->createElement('DrivingLicenceRequired', $this->DrivingLicenceRequired);
         $Mobility->appendChild($DrivingLicenceRequired);
 
-        $TravelRequired = $xmlTree->createElement('TravelRequired', $this->job->TravelRequired);
+        $TravelRequired = $xmlTree->createElement('TravelRequired', $this->TravelRequired);
         $JobPositionRequirements->appendChild($TravelRequired);
 
         $JobPositionInformation->appendChild($JobPositionRequirements);
 
-        $NumberToFill = $xmlTree->createElement('NumberToFill', $this->job->NumberToFill);
+        $NumberToFill = $xmlTree->createElement('NumberToFill', $this->NumberToFill);
         $JobPositionInformation->appendChild($NumberToFill);
 
-        $AssignmentStartDate = $xmlTree->createElement('AssignmentStartDate', $this->job->AssignmentStartDate->format('Y-m-dTH:m:sZ'));
+        $AssignmentStartDate = $xmlTree->createElement('AssignmentStartDate', $this->AssignmentStartDate->format('Y-m-dTH:m:sZ'));
         $JobPositionInformation->appendChild($AssignmentStartDate);
 
-        $AssignmentEndDate = $xmlTree->createElement('AssignmentEndDate', $this->job->AssignmentEndDate->format('Y-m-dTH:m:sZ'));
+        $AssignmentEndDate = $xmlTree->createElement('AssignmentEndDate', $this->AssignmentEndDate->format('Y-m-dTH:m:sZ'));
         $JobPositionInformation->appendChild($AssignmentEndDate);
 
         $JobPositionPosting->appendChild($JobPositionInformation);
@@ -251,16 +248,16 @@ class XMLJob extends Company implements JobInterface
     public function generateHead(\DOMDocument $xmlTree): \DOMElement
     {
         $header = $xmlTree->createElement('Header');
-        $SupplierId = $xmlTree->createElement('SupplierId', $this->job->SupplierId);
+        $SupplierId = $xmlTree->createElement('SupplierId', $this->SupplierId);
         $header->appendChild($SupplierId);
 
-        $Timestamp = $xmlTree->createElement('Timestamp', $this->job->Timestamp->format('Y-m-dTH:m:sZ'));
+        $Timestamp = $xmlTree->createElement('Timestamp', $this->Timestamp->format('Y-m-dTH:m:sZ'));
         $header->appendChild($Timestamp);
 
-        $Amount = $xmlTree->createElement('Amount', $this->job->Amount);
+        $Amount = $xmlTree->createElement('Amount', $this->Amount);
         $header->appendChild($Amount);
 
-        $TypeOfLoad = $xmlTree->createElement('TypeOfLoad', $this->job->TypeOfLoad);
+        $TypeOfLoad = $xmlTree->createElement('TypeOfLoad', $this->TypeOfLoad);
         $header->appendChild($TypeOfLoad);
         return $header;
     }
@@ -308,41 +305,4 @@ class XMLJob extends Company implements JobInterface
         return true;
     }
 
-    private function companyCredentialsValid()
-    {
-        if(empty($this->getCompanyName())){
-            throw new \Exception('Company Name is empty');
-            return false;
-        }
-        if(empty($this->getSupplierID())){
-            throw new \Exception('SupplierID is empty');
-        }
-        if(empty($this->getAllianzpartnerNumber())){
-            throw new \Exception('Allianzpartner Number Name is empty');
-        }
-        if(empty($this->getPIN())){
-            throw new \Exception('PIN is empty');
-        }
-        return true;
-    }
-
-    public function upload()
-    {
-        $url = getenv('HRBAXML_UPLOAD_URL').'?upload='.$this->getFileFullPath();
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        // The --cert option
-        curl_setopt($ch, CURLOPT_SSLCERT, $this->getCertificateFile());
-        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->getPIN());
-        $result  = curl_exec($ch);
-        // also get the error and response code
-        $errors = curl_error($ch);
-        $response = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        if(isset($errors)){
-            return $errors;
-        }
-        return $response;
-    }
 }
