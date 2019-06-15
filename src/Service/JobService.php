@@ -1,6 +1,7 @@
 <?php
 namespace kzorluoglu\Arbeitsagentur\Service;
 
+use Dotenv\Dotenv;
 use kzorluoglu\Arbeitsagentur\Company;
 use kzorluoglu\Arbeitsagentur\Contract\JobInterface;
 

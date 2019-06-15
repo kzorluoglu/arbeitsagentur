@@ -8,26 +8,8 @@ use kzorluoglu\Arbeitsagentur\Contract\RemoteInterface;
 
 class XMLJob extends Job implements JobInterface
 {
-    private $filePath = 'C:\Users\kzorluoglu\PhpstormProjects\ArbeitsagenturAPI\tmp';
+    /** @var string */
     private $fileFullPath;
-    public function __construct()
-    {
-        $this->fileFullPath = $this->filePath . '\test.xml';
-    }
-
-    public function isValidRequest(){
-
-        if(!$this->certificateValid()){
-            return false;
-        }
-
-        if(!$this->companyCredentialsValid()){
-            return false;
-        }
-
-        return true;
-
-    }
 
     public function generateXMLFile()
     {
@@ -46,7 +28,7 @@ class XMLJob extends Job implements JobInterface
 
         $xmlTree->preserveWhiteSpace = false;
         $xmlTree->formatOutput = true;
-        echo $xmlTree->save($this->fileFullPath);
+        echo $xmlTree->save($this->getFileFullPath());
 
     }
 
@@ -284,6 +266,10 @@ class XMLJob extends Job implements JobInterface
 
     public function generate()
     {
+        if(!isset($this->fileFullPath)){
+           throw new \Exception('XML File Full Path not setted');
+        }
+
         $this->generateXMLFile();
     }
 
@@ -294,15 +280,15 @@ class XMLJob extends Job implements JobInterface
 
     public function getXML()
     {
-        return file_exists($this->fileFullPath) ? file_get_contents($this->fileFullPath) : 'null';
+        return file_exists($this->fileFullPath) ? file_get_contents($this->fileFullPath) : false;
     }
 
-    private function certificateValid()
+
+    /**
+     * @param string $fileFullPath
+     */
+    public function setFileFullPath(string $fileFullPath)
     {
-        if(!file_exists($this->getCertificateFile())){
-            throw new \Exception('Certificate File not exists');
-        }
-        return true;
+        $this->fileFullPath = $fileFullPath;
     }
-
 }

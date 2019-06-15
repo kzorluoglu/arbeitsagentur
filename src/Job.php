@@ -63,6 +63,5 @@ class Job
     {
 
             $this->attribute[$name] = $value;
-
     }
 }

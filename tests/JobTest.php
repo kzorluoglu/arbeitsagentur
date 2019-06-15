@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use kzorluoglu\Arbeitsagentur\Service\JobService;
 use kzorluoglu\Arbeitsagentur\XMLJob;
+use kzorluoglu\Arbeitsagentur\Company;
 
 class JobTest extends TestCase
 {
@@ -89,7 +90,9 @@ class JobTest extends TestCase
     public function testExportXML()
     {
         $xmlJob = $this->getXMLJob();
-        $this->jobService = new JobService($this->getXMLJob());
+        $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
+
+        $this->jobService = new JobService($xmlJob);
         $jobs = $this->jobService->generate();
         $generatedXMLFile = $xmlJob->getXML();
 
@@ -98,8 +101,11 @@ class JobTest extends TestCase
 
     public function testXMLJobPrepare()
     {
-         $this->jobService = new JobService($this->getXMLJob());
-         $this->jobService->setCompany(new \kzorluoglu\Arbeitsagentur\Company());
+        $xmlJob = $this->getXMLJob();
+        $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
+
+        $this->jobService = new JobService($xmlJob);
+         $this->jobService->setCompany(new Company());
         $this->assertTrue($this->jobService->isValid());
     }
 
@@ -108,12 +114,12 @@ class JobTest extends TestCase
      */
     public function testXMLJobUpload(){
 
-        $xmlJob = new XMLJob($this->getXMLJob());
+        $xmlJob = $this->getXMLJob();
+        $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
+
         $this->jobService = new JobService($xmlJob);
-        $this->jobService->setCompany(new \kzorluoglu\Arbeitsagentur\Company());
-
+        $this->jobService->setCompany(new Company());
         $status = $this->jobService->upload();
-
         $this->assertSame( $status, 'could not load PEM client certificate, OpenSSL error error:0909006C:PEM routines:get_name:no start line, (no key found, wrong pass phrase, or wrong file format?)');
     }
 
