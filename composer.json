@@ -1,21 +1,23 @@
 {
-    "name": "kzorluoglu/arbeitsagentur",
-    "version": "v1.0.0",
-    "type": "library",
-    "require": {},
-    "require-dev": {
-        "phpunit/phpunit": "^8.2"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Koray Zorluoglu",
-            "email": "koray@d8devs.com"
-        }
-    ],
-    "autoload" : {
-        "psr-4" : {
-            "kzorluoglu\\Arbeitsagentur\\" : "src/"
-        }
+  "name": "kzorluoglu/arbeitsagentur",
+  "description": "A HR-BA XML Generator for Bundensagentur für Arbeit",
+  "type": "library",
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.2"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Koray Zorluoglu",
+      "email": "koray@d8devs.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "kzorluoglu\\Arbeitsagentur\\": "src/"
+    }
+  }
 }
