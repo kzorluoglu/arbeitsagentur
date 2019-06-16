@@ -1,13 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use kzorluoglu\Arbeitsagentur\Service\JobService;
+use kzorluoglu\Arbeitsagentur\Service\BundesagenturService;
 use kzorluoglu\Arbeitsagentur\XMLJob;
 use kzorluoglu\Arbeitsagentur\Company;
 
 class JobTest extends TestCase
 {
-    private $jobService;
+    private $bundesagenturService;
 
     protected function setUp(): void
     {
@@ -86,14 +86,13 @@ class JobTest extends TestCase
     }
 
 
-
     public function testExportXML()
     {
         $xmlJob = $this->getXMLJob();
-        $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
+        $xmlJob->setFileFullPath(__DIR__ . '\\unittest.xml');
 
-        $this->jobService = new JobService($xmlJob);
-        $jobs = $this->jobService->generate();
+        $this->bundesagenturService = new BundesagenturService($xmlJob);
+        $jobs = $this->bundesagenturService->generate();
         $generatedXMLFile = $xmlJob->getXML();
 
         $this->assertSame($jobs->getAll(), $generatedXMLFile);
@@ -103,39 +102,40 @@ class JobTest extends TestCase
     {
 
         $xmlJob = $this->getXMLJob();
-        $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
+        $xmlJob->setFileFullPath(__DIR__ . '\\unittest.xml');
 
         $company = new Company;
-        $company->setCertificateFilePath(__DIR__.'\\test.pem')
+        $company->setCertificateFilePath(__DIR__ . '\\test.pem')
             ->setCompanyName('V123456')
             ->setSupplierID('V123456')
             ->setAllianzpartnerNumber('123456')
             ->setPIN('%&!RANDOM&PIN!&%');
 
-        $this->jobService = new JobService($xmlJob);
-        $this->jobService->setCompany($company);
-        $this->assertTrue($this->jobService->isValid());
+        $this->bundesagenturService = new BundesagenturService($xmlJob);
+        $this->bundesagenturService->setCompany($company);
+        $this->assertTrue($this->bundesagenturService->isValid());
     }
 
     /**
      * Test Upload Not Possible...
      */
-    public function testXMLJobUpload(){
+    public function testXMLJobUpload()
+    {
 
         $xmlJob = $this->getXMLJob();
-        $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
+        $xmlJob->setFileFullPath(__DIR__ . '\\unittest.xml');
 
         $company = new Company;
-        $company->setCertificateFilePath(__DIR__.'\\test.pem')
+        $company->setCertificateFilePath(__DIR__ . '\\test.pem')
             ->setCompanyName('V123456')
             ->setSupplierID('V123456')
             ->setAllianzpartnerNumber('123456')
             ->setPIN('%&!RANDOM&PIN!&%');
 
-        $this->jobService = new JobService($xmlJob);
-        $this->jobService->setCompany($company);
-        $status = $this->jobService->upload();
-        $this->assertSame( $status, 'could not load PEM client certificate, OpenSSL error error:0909006C:PEM routines:get_name:no start line, (no key found, wrong pass phrase, or wrong file format?)');
+        $this->bundesagenturService = new BundesagenturService($xmlJob);
+        $this->bundesagenturService->setCompany($company);
+        $status = $this->bundesagenturService->upload();
+        $this->assertSame($status, 'could not load PEM client certificate, OpenSSL error error:0909006C:PEM routines:get_name:no start line, (no key found, wrong pass phrase, or wrong file format?)');
     }
 
 

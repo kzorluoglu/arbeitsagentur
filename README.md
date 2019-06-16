@@ -124,7 +124,7 @@ composer require kzorluoglu/arbeitsagentur
      - ~~upload()~~
 
 -   ~~RemoteInterface~~ canceled
--   ~~Arbeitsagentur implements RemoteInterface Class~~ That placed under CompanyClass
+-   ~~Arbeitsagentur implements RemoteInterface Class~~ That placed under Company Class
     - ~~setCertificate($filePathFromCertificate)~~
     - ~~getCertificate()~~
     - ~~getSupplierID()~~
