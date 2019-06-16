@@ -50,7 +50,7 @@ class JobService
 
     public function upload()
     {
-        $url = getenv('HRBAXML_UPLOAD_URL').'?upload='.$this->job->getFileFullPath();
+        $url = 'https://hrbaxml.arbeitsagentur.de/in/upload.php?upload='.$this->job->getFileFullPath();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         // The --cert option
