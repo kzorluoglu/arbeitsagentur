@@ -101,11 +101,19 @@ class JobTest extends TestCase
 
     public function testXMLJobPrepare()
     {
+
         $xmlJob = $this->getXMLJob();
         $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
 
+        $company = new Company;
+        $company->setCertificateFilePath(__DIR__.'\\test.pem')
+            ->setCompanyName('V123456')
+            ->setSupplierID('V123456')
+            ->setAllianzpartnerNumber('123456')
+            ->setPIN('%&!RANDOM&PIN!&%');
+
         $this->jobService = new JobService($xmlJob);
-         $this->jobService->setCompany(new Company());
+        $this->jobService->setCompany($company);
         $this->assertTrue($this->jobService->isValid());
     }
 
@@ -117,8 +125,15 @@ class JobTest extends TestCase
         $xmlJob = $this->getXMLJob();
         $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
 
+        $company = new Company;
+        $company->setCertificateFilePath(__DIR__.'\\test.pem')
+            ->setCompanyName('V123456')
+            ->setSupplierID('V123456')
+            ->setAllianzpartnerNumber('123456')
+            ->setPIN('%&!RANDOM&PIN!&%');
+
         $this->jobService = new JobService($xmlJob);
-        $this->jobService->setCompany(new Company());
+        $this->jobService->setCompany($company);
         $status = $this->jobService->upload();
         $this->assertSame( $status, 'could not load PEM client certificate, OpenSSL error error:0909006C:PEM routines:get_name:no start line, (no key found, wrong pass phrase, or wrong file format?)');
     }

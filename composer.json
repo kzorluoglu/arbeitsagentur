@@ -2,9 +2,7 @@
     "name": "kzorluoglu/arbeitsagentur",
     "version": "dev-master",
     "type": "project",
-    "require": {
-        "vlucas/phpdotenv": "^3.3"
-    },
+    "require": {},
     "require-dev": {
         "phpunit/phpunit": "^8.2"
     },

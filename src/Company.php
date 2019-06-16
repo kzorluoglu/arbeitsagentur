@@ -78,7 +78,7 @@ class Company
         if(isset($this->certificateFilePath)){
             return $this->certificateFilePath;
         }
-        return getenv('CertificateFilePath');
+        throw new \Exception('Certificate File Path not defined, please use setCertificateFile() method');
     }
 
     /** @return string */
@@ -87,7 +87,7 @@ class Company
         if(isset($this->companyName)){
             return $this->companyName;
         }
-        return getenv('CompanyName');
+        throw new \Exception('Company Name not defined, please use setCompanyName() method');
     }
 
     /** @return string */
@@ -96,7 +96,7 @@ class Company
         if(isset($this->supplierID)){
             return $this->supplierID;
         }
-        return getenv('SupplierID');
+        throw new \Exception('Supplier ID not defined, please use setSupplierID() method');
     }
 
     /** @return string */
@@ -105,24 +105,24 @@ class Company
         if(isset($this->allianzpartnerNumber)){
             return $this->allianzpartnerNumber;
         }
-        return getenv('AllianzpartnerNumber');
+        throw new \Exception('Allianzpartner Number not defined, please use setAllianzpartnerNumber() method');
     }
 
 
     /** @return string */
     public function getPIN()
+
     {
         if(isset($this->pin)){
             return $this->pin;
         }
-        return getenv('PIN');
+        throw new \Exception('PIN Number not defined, please use setPIN() method');
     }
 
     public function isValid()
     {
         if(empty($this->getCompanyName())){
             throw new \Exception('Company Name is empty');
-            return false;
         }
         if(empty($this->getSupplierID())){
             throw new \Exception('SupplierID is empty');
