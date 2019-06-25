@@ -4,7 +4,7 @@
 ## Requirements
  - PHP 7.2 or higher
 
-### How to Use
+## How to Use
 create Job Class with your Information
 ```
 use kzorluoglu\Arbeitsagentur\XMLJob;
@@ -80,27 +80,22 @@ $xmlJob->AssignmentEndDate = new \DateTime();
 and create JobService for XMLJOB
 
 ```
-    $xmlJob = new XMLJob($xmlJob);
-    $jobService = new JobService($xmlJob);
-
-    // output for XML File
-    $jobs = $jobService->generate();
-
-    //OPTIONAL View generated XML 
-    $xmlJob->getXML();
-
-
     // Prepare for Upload
-    $company = new Company;
-    $company->setCertificateFilePath(__DIR__.'\\test.pem')
-        ->setCompanyName('V123456')
-        ->setSupplierID('V123456')
-        ->setAllianzpartnerNumber('123456')
-        ->setPIN('%&!RANDOM&PIN!&%');
+        $xmlJob = $this->getXMLJob();
+        $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
 
-    $jobService->setCompany($company);
+        $company = new Company;
+        $company->setCertificateFilePath(__DIR__ . '\\test.pem')
+            ->setCompanyName('V123456')
+            ->setSupplierID('V123456')
+            ->setAllianzpartnerNumber('123456')
+            ->setPIN('%&!RANDOM&PIN!&%');
 
-    if($jobService->isValid()){
+        $this->bundesagenturService = new BundesagenturService();
+        $this->bundesagenturService->setCompany($company);
+        $this->bundesagenturService->setJob($xmlJob);
+
+    if($this->bundesagenturService->isValid()){
         $jobService->upload();
     }
 
@@ -113,7 +108,10 @@ and create JobService for XMLJOB
 composer require kzorluoglu/arbeitsagentur
 ```
 
-### TODO
+### Database
+Import the .SQL files from 'sql' folder.
+
+## TODO
 - XMLJob
     - Dynamic Filename with Arbeitsagentur Format  (ABCCCCCCCCCC_DDDD-DD-DD_DD-DD-DD_ESSSS.HHH) 
     ![Alt text](todo/XMLFileName.png?raw=true "Title")
@@ -132,7 +130,7 @@ composer require kzorluoglu/arbeitsagentur
     - ~~getArbeitgebernummer()~~
     - ~~getPIN()~~
 
-### Tests
+## Tests
 Create your test under *tests* folder, and run phpunit.
 ```
 ./vendor/bin/phpunit
