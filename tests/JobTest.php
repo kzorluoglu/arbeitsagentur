@@ -19,68 +19,81 @@ class JobTest extends TestCase
         $job = new XMLJob();
         $job->SupplierId = 'A000000000';
         $job->Timestamp = new \DateTime('now');
-        $job->Amount = '1';
-        $job->TypeOfLoad = '1';
-        $job->JobPositionPostingId = '1';
-        $job->StartDate = new \DateTime('now');
-        $job->EndDate = new \DateTime('now');
-        $job->Status = '1';
-        $job->SupplierName = '1';
-        $job->SupplierIndustrie = '1';
-        $JobPositionTitle = $job->JobPositionTitle = new stdClass();
-        $JobPositionTitle->TitleCode = '1';
-        $JobPositionTitle->Degree = '1';
+        $job->JobID = 3333;  // Unique ID
+        $job->HiringCompanyName = 'Muster Jobbörse Firma GMBH';
+        $job->HiringCompanyID = 'A000000000';
+        $job->HiringCompanyWebpage = 'http://musterjobboerse.de';
+        $job->HiringCompanySize = 1;  // Select
+        $job->HiringCompanyIndustry = '01';  // Select
+        $job->Salutation = 1;  // Select
+        $job->Title = "";
+        $job->GivenName = 'Jobbörse Contact Firstname';
+        $job->FamilyName = 'Jobbörse Contact Lastname';
+        $job->PositionTitle = 'Contact Person';
+        $job->CountryCode = 'DE';  // Select
+        $job->Region = '1'; // Baden-Württemberg  // Select
+        $job->PostalCode = '79111';
+        $job->Municipality = 'Lörrach';
+        $job->StreetName = 'Musterstrasse 3';
+        $job->IntlCode = '+49';
+        $job->AreaCode = '176';
+        $job->TelNumber = '33322444';
+        $job->EMail = 'support@musterjobboerse.de';
+        $job->GeneralWebSite = 'http://musterjobboerse.de';
 
-        $AlternativeJobPositionTitle = $job->AlternativeJobPositionTitle = new stdClass();
-        $AlternativeJobPositionTitle->TitleCode = '1';
-        $AlternativeJobPositionTitle->Degree = '1';
+        $job->PostStartDate = new \DateTime('now'); // Date for offer show
+        $job->PostEndDate = new \DateTime('tomorrow');             // Date for offer end
+        $job->PostLastModificationDate = new \DateTime('now');  // Date for offer modification
+        $job->Status = 1;             // Share public  // Select
+        $job->Action = 1;             // Insert new offer  // Select
+        $job->SupplierName = "A000000000";  // Suppliername from
 
-        $job->JobPositionTitleDescription = '1';
-        $job->JobOfferType = '1';
-        $job->SocialInsurance = '1';
-        $job->CountryCode = '1';
-        $job->PostalCode = '1';
-        $job->Region = '1';
-        $job->AddressLine = '1';
-        $job->StreetName = '1';
-        $job->Leadership = '1';
-        $job->MiniJob = '1';
-        $job->TermLength = '1';
-        $job->TermDate = new \DateTime('now');
-        $job->ApplicationStartDate = new \DateTime('now');
-        $job->ApplicationEndDate = new \DateTime('now');
-        $job->TemporaryOrRegular = '1';
-        $job->Salary = '1';
+        $job->Job_TitleCode = "Muster Job";  //Muster Jobbörse Firma GMBH
+        $job->Job_Degree = 1;  // Select
+        $job->Job_JobPositionTitle = "Fachhochschule Muster Meister";
+        $job->Job_JobOfferType = 1;  // Select
+        $job->Job_SocialInsurance = 1;  // Select
+        $job->Job_Objective = "This is a description place with maximum 4000 Character";
+        $job->Job_EducationAuthorisation = 1;  // Select
 
-        $EducationQualifs = $job->EducationQualifs = new stdClass();
-        $EducationQualifs->EduDegree = '1';
-        $EducationQualifs->EduDegreeRequired = '1';
+        $job->Job_CountryCode = "DE";  // Select
+        $job->Job_Region = 1;  // Select
+        $job->Job_PostalCode = "79555";
+        $job->Job_Municipality = "Lörrach";
+        $job->Job_StreetName = "Musterstraße 3";
 
-        $ManagementQualifs = $job->ManagementQualifs = new stdClass();
-        $ManagementQualifs->LeadershipType = '1';
-        $ManagementQualifs->Authority = '1';
-        $ManagementQualifs->LeadershipEx = '1';
-        $ManagementQualifs->BudgetResp = '1';
-        $ManagementQualifs->EmployeeResp = '1';
+        $job->Job_KindOfApplication = 3;  // Select
+        $job->Job_ApplyStartDate = new \DateTime('now');
+        $job->Job_ApplyEndDate = new \DateTime('tomorrow');
+        $job->Job_Enclosures = "Please with CV sending";
 
-        $Language = $job->Language = new stdClass();
-        $Language->LanguageName = '1';
-        $Language->LanguageLevel = '1';
+        $job->Job_MiniJob = 1;  // Select
+        $job->Job_WorkingPlan = 1;  // Select
 
-        $HardSkill = $job->HardSkill = new stdClass();
-        $HardSkill->SkillName = '1';
-        $HardSkill->SkillLevel = '1';
+        $job->Job_TermLength = 24; // Month Count
+        $job->Job_TermDate = new \DateTime('now');
+        $job->Job_TermDate->modify('+1 year');
 
-        $SoftSkill = $job->SoftSkill = new stdClass();
-        $SoftSkill->SkillName = '1';
-        $SoftSkill->SkillLevel = '1';
+        $job->Job_EduDegree = 2; // Select
+        $job->Job_EduDegreeRequired = 1; // Select
 
-        $job->DrivingLicence = '1';
-        $job->DrivingLicenceRequired = '1';
-        $job->TravelRequired = '1';
-        $job->NumberToFill = '1';
-        $job->AssignmentStartDate = new \DateTime();
-        $job->AssignmentEndDate = new \DateTime();
+        $job->Job_LanguageName = 2; // Select
+        $job->Job_LanguageLevel = 1; // Select
+
+        $job->Job_DrivingLicenceName = 2; // Select
+        $job->Job_DrivingLicenceRequired = 1; // Select
+
+        $job->Job_SkillName = 2; // Select
+        $job->Job_SkillLevel = 1; // Select
+
+        $job->Job_TravelRequired = 1; // Select
+        $job->Job_Handicap = 1; // Select
+        $job->Job_NumberToFill = 33;
+
+        $job->Job_AssignmentStartDate = new \DateTime('now');
+        $job->Job_AssignmentEndDate = new \DateTime('now');
+        $job->Job_AssignmentEndDate->modify('+30 Day');
+
 
         return $job;
     }
@@ -89,20 +102,21 @@ class JobTest extends TestCase
     public function testExportXML()
     {
         $xmlJob = $this->getXMLJob();
-        $xmlJob->setFileFullPath(__DIR__ . '\\unittest.xml');
+        $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
 
-        $this->bundesagenturService = new BundesagenturService($xmlJob);
-        $jobs = $this->bundesagenturService->generate();
-        $generatedXMLFile = $xmlJob->getXML();
+        $this->bundesagenturService = new BundesagenturService();
+        $this->bundesagenturService->setJob($xmlJob);
+        $jobs = $this->bundesagenturService->generate()->getAll();
 
-        $this->assertSame($jobs->getAll(), $generatedXMLFile);
+
+        $this->assertSame($jobs, $xmlJob->getXMLFile());
     }
 
     public function testXMLJobPrepare()
     {
 
         $xmlJob = $this->getXMLJob();
-        $xmlJob->setFileFullPath(__DIR__ . '\\unittest.xml');
+        $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
 
         $company = new Company;
         $company->setCertificateFilePath(__DIR__ . '\\test.pem')
@@ -111,8 +125,10 @@ class JobTest extends TestCase
             ->setAllianzpartnerNumber('123456')
             ->setPIN('%&!RANDOM&PIN!&%');
 
-        $this->bundesagenturService = new BundesagenturService($xmlJob);
+        $this->bundesagenturService = new BundesagenturService();
         $this->bundesagenturService->setCompany($company);
+        $this->bundesagenturService->setJob($xmlJob);
+
         $this->assertTrue($this->bundesagenturService->isValid());
     }
 
@@ -123,7 +139,7 @@ class JobTest extends TestCase
     {
 
         $xmlJob = $this->getXMLJob();
-        $xmlJob->setFileFullPath(__DIR__ . '\\unittest.xml');
+        $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
 
         $company = new Company;
         $company->setCertificateFilePath(__DIR__ . '\\test.pem')
@@ -132,10 +148,11 @@ class JobTest extends TestCase
             ->setAllianzpartnerNumber('123456')
             ->setPIN('%&!RANDOM&PIN!&%');
 
-        $this->bundesagenturService = new BundesagenturService($xmlJob);
+        $this->bundesagenturService = new BundesagenturService();
         $this->bundesagenturService->setCompany($company);
+        $this->bundesagenturService->setJob($xmlJob);
         $status = $this->bundesagenturService->upload();
-        $this->assertSame($status, 'could not load PEM client certificate, OpenSSL error error:0909006C:PEM routines:get_name:no start line, (no key found, wrong pass phrase, or wrong file format?)');
+        $this->assertSame($status, 'could not load PEM client certificate, OpenSSL error error:02001002:system library:fopen:No such file or directory, (no key found, wrong pass phrase, or wrong file format?)');
     }
 
 

@@ -5,6 +5,7 @@ namespace kzorluoglu\Arbeitsagentur\Service;
 use Dotenv\Dotenv;
 use kzorluoglu\Arbeitsagentur\Company;
 use kzorluoglu\Arbeitsagentur\Contract\JobInterface;
+use kzorluoglu\Arbeitsagentur\Job;
 
 class BundesagenturService
 {
@@ -14,22 +15,26 @@ class BundesagenturService
     /** @var string */
     private $uploadUrl;
 
-    /**
-     * JobService constructor.
-     * @param JobInterface $job
-     */
-    public function __construct(JobInterface $job)
+    public function __construct()
     {
-        $this->job = $job;
-        $this->uploadUrl = 'https://hrbaxml.arbeitsagentur.de/in/upload.php?upload=' . $this->job->getFileFullPath();
+        $this->uploadUrl = 'https://hrbaxml.arbeitsagentur.de/in/upload.php?upload=';
     }
 
     /**
      * @param Company $company
      */
-    public function setCompany(Company $company): void
+    public function setCompany(Company $company)
     {
         $this->company = $company;
+        return;
+    }
+
+    /**
+     * @param Company $company
+     */
+    public function setJob(JobInterface $job)
+    {
+        $this->job = $job;
         return;
     }
 
@@ -52,7 +57,7 @@ class BundesagenturService
     public function upload()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->uploadUrl);
+        curl_setopt($ch, CURLOPT_URL, $this->uploadUrl . $this->job->getFilePath());
         // The --cert option
         curl_setopt($ch, CURLOPT_SSLCERT, $this->company->getCertificateFile());
         curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->company->getPIN());
