@@ -7,6 +7,7 @@ use kzorluoglu\Arbeitsagentur\Company;
 
 class JobTest extends TestCase
 {
+    /** @var BundesagenturService */
     private $bundesagenturService;
 
     protected function setUp(): void
@@ -14,32 +15,70 @@ class JobTest extends TestCase
         parent::setUp();
     }
 
-    public function getXMLJob()
+    /**
+     * @return Company
+     */
+    private function getCompany()
+    {
+        $company = new Company;
+        $company->setCertificateFilePath(__DIR__ . '/test.pem')
+            ->setCompanyName('V123456')
+            ->setSupplierID('V123456')
+            ->setAllianzpartnerNumber('123456')
+            ->setPIN('%&!RANDOM&PIN!&%')
+            ->setHiringCompanyID('1234567')
+            ->setHiringCompanyWebpage('http://test.com')
+            ->setHiringCompanySize(3)
+            ->setHiringCompanyIndustry('01')
+            ->setSalutation('Herr')
+            ->setTitle(NULL)
+            ->setGivenName('Max')
+            ->setFamilyName('Mustermann')
+            ->setPositionTitle(NULL)
+            ->setCountryCode('DE')
+            ->setRegion(1)
+            ->setPostalCode('33333')
+            ->setMunicipality('Musterstadt')
+            ->setStreetName('Musterstrasse 3')
+            ->setIntlCode('+49')
+            ->setAreaCode('333')
+            ->setTelNumber('333333333')
+            ->setEMail('test@test.com')
+            ->setGeneralWebSite('http://test.com');
+        return $company;
+    }
+
+    /**
+     * @param Company $company
+     * @return XMLJob
+     * @throws Exception
+     */
+    private function getXMLJob(Company $company)
     {
         $job = new XMLJob();
-        $job->SupplierId = 'A000000000';
+        $job->SupplierId = $company->getSupplierID();
         $job->Timestamp = new \DateTime('now');
-        $job->JobID = 3333;  // Unique ID
-        $job->HiringCompanyName = 'Muster Jobbörse Firma GMBH';
-        $job->HiringCompanyID = 'A000000000';
-        $job->HiringCompanyWebpage = 'http://musterjobboerse.de';
-        $job->HiringCompanySize = 1;  // Select
-        $job->HiringCompanyIndustry = '01';  // Select
-        $job->Salutation = 1;  // Select
-        $job->Title = "";
-        $job->GivenName = 'Jobbörse Contact Firstname';
-        $job->FamilyName = 'Jobbörse Contact Lastname';
-        $job->PositionTitle = 'Contact Person';
-        $job->CountryCode = 'DE';  // Select
-        $job->Region = '1'; // Baden-Württemberg  // Select
-        $job->PostalCode = '79111';
-        $job->Municipality = 'Lörrach';
-        $job->StreetName = 'Musterstrasse 3';
-        $job->IntlCode = '+49';
-        $job->AreaCode = '176';
-        $job->TelNumber = '33322444';
-        $job->EMail = 'support@musterjobboerse.de';
-        $job->GeneralWebSite = 'http://musterjobboerse.de';
+        $job->JobID = 3333;
+        $job->HiringCompanyName = $company->getCompanyName();
+        $job->HiringCompanyID = $company->getHiringCompanyID(); // ID des betreuten Arbeitgeber-Accounts in der JOBBÖRSE (Kundennummer)
+        $job->HiringCompanyWebpage = $company->getHiringCompanyWebpage();
+        $job->HiringCompanySize = $company->getHiringCompanySize();
+        $job->HiringCompanyIndustry = $company->getHiringCompanyIndustry();
+        $job->Salutation = $company->getSalutation();
+        $job->Title = $company->getTitle();
+        $job->GivenName = $company->getGivenName();
+        $job->FamilyName = $company->getFamilyName();
+        $job->PositionTitle = $company->getPositionTitle();
+        $job->CountryCode = $company->getCountryCode();
+        $job->Region = $company->getRegion();
+        $job->PostalCode = $company->getPostalCode();
+        $job->Municipality = $company->getMunicipality();
+        $job->StreetName = $company->getStreetName();
+        $job->IntlCode = $company->getIntlCode();
+        $job->AreaCode = $company->getAreaCode();
+        $job->TelNumber = $company->getTelNumber();
+        $job->EMail = $company->getEMail();
+        $job->GeneralWebSite = $company->getGeneralWebSite();
 
         $job->PostStartDate = new \DateTime('now'); // Date for offer show
         $job->PostEndDate = new \DateTime('tomorrow');             // Date for offer end
@@ -93,38 +132,27 @@ class JobTest extends TestCase
         $job->Job_AssignmentStartDate = new \DateTime('now');
         $job->Job_AssignmentEndDate = new \DateTime('now');
         $job->Job_AssignmentEndDate->modify('+30 Day');
-
-
         return $job;
     }
 
-
     public function testExportXML()
     {
-        $xmlJob = $this->getXMLJob();
+        $company = $this->getCompany();
+        $xmlJob = $this->getXMLJob($company);
         $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
 
         $this->bundesagenturService = new BundesagenturService();
         $this->bundesagenturService->setJob($xmlJob);
         $jobs = $this->bundesagenturService->generate()->getAll();
 
-
         $this->assertSame($jobs, $xmlJob->getXMLFile());
     }
 
     public function testXMLJobPrepare()
     {
-
-        $xmlJob = $this->getXMLJob();
+        $company = $this->getCompany();
+        $xmlJob = $this->getXMLJob($company);
         $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
-
-        $company = new Company;
-        $company->setCertificateFilePath(__DIR__ . '\\test.pem')
-            ->setCompanyName('V123456')
-            ->setSupplierID('V123456')
-            ->setAllianzpartnerNumber('123456')
-            ->setPIN('%&!RANDOM&PIN!&%');
-
         $this->bundesagenturService = new BundesagenturService();
         $this->bundesagenturService->setCompany($company);
         $this->bundesagenturService->setJob($xmlJob);
@@ -132,21 +160,11 @@ class JobTest extends TestCase
         $this->assertTrue($this->bundesagenturService->isValid());
     }
 
-    /**
-     * Test Upload Not Possible...
-     */
     public function testXMLJobUpload()
     {
-
-        $xmlJob = $this->getXMLJob();
+        $company = $this->getCompany();
+        $xmlJob = $this->getXMLJob($company);
         $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
-
-        $company = new Company;
-        $company->setCertificateFilePath(__DIR__ . '\\test.pem')
-            ->setCompanyName('V123456')
-            ->setSupplierID('V123456')
-            ->setAllianzpartnerNumber('123456')
-            ->setPIN('%&!RANDOM&PIN!&%');
 
         $this->bundesagenturService = new BundesagenturService();
         $this->bundesagenturService->setCompany($company);
@@ -154,6 +172,5 @@ class JobTest extends TestCase
         $status = $this->bundesagenturService->upload();
         $this->assertSame($status, 'could not load PEM client certificate, OpenSSL error error:02001002:system library:fopen:No such file or directory, (no key found, wrong pass phrase, or wrong file format?)');
     }
-
 
 }

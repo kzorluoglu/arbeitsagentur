@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <HRBAXMLJobPositionPosting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Header>
-		<SupplierId>A000000000</SupplierId>
-		<Timestamp>2019-06-25UTC18:06:130</Timestamp>
+		<SupplierId>V123456</SupplierId>
+		<Timestamp>2019-06-29UTC13:06:060</Timestamp>
 		<Amount>0</Amount>
 		<TypeOfLoad>F</TypeOfLoad>
 	</Header>
@@ -11,64 +11,64 @@
 			<JobPositionPostingId>3333</JobPositionPostingId>
 			<Boxnumber>a</Boxnumber>
 			<HiringOrg>
-				<HiringOrgName>Muster Jobbörse Firma GMBH</HiringOrgName>
-				<HiringOrgId>A000000000</HiringOrgId>
-				<ProfileWebSite>http://musterjobboerse.de</ProfileWebSite>
-				<HiringOrgSize>1</HiringOrgSize>
+				<HiringOrgName>V123456</HiringOrgName>
+				<HiringOrgId>1234567</HiringOrgId>
+				<ProfileWebSite>http://test.com</ProfileWebSite>
+				<HiringOrgSize>3</HiringOrgSize>
 				<Industry>
 					<NAICS>01</NAICS>
 				</Industry>
 				<Contact>
-					<Salutation>1</Salutation>
-					<GivenName>Jobbörse Contact Firstname</GivenName>
-					<FamilyName>Jobbörse Contact Lastname</FamilyName>
-					<PositionTitle>Contact Person</PositionTitle>
+					<Salutation>Herr</Salutation>
+					<GivenName>Max</GivenName>
+					<FamilyName>Mustermann</FamilyName>
+					<PositionTitle/>
 					<PostalAddress>
 						<CountryCode>DE</CountryCode>
 						<Region>1</Region>
-						<PostalCode>79111</PostalCode>
-						<Municipality>Lörrach</Municipality>
+						<PostalCode>33333</PostalCode>
+						<Municipality>Musterstadt</Municipality>
 						<StreetName>Musterstrasse 3</StreetName>
  					</PostalAddress>
 					<VoiceNumber>
 						<IntlCode>+49</IntlCode>
-						<AreaCode>176</AreaCode>
-						<TelNumber>33322444</TelNumber>
+						<AreaCode>333</AreaCode>
+						<TelNumber>333333333</TelNumber>
 					</VoiceNumber>
-					<EMail>support@musterjobboerse.de</EMail>
-					<GeneralWebSite>http://musterjobboerse.de</GeneralWebSite>
+					<EMail>test@test.com</EMail>
+					<GeneralWebSite>http://test.com</GeneralWebSite>
 				</Contact>
 			</HiringOrg>
 			<PostDetail>
-				<StartDate>2019-06-25UTC18:06:130</StartDate>
-				<EndDate>2019-06-26UTC00:06:000</EndDate>
-				<LastModificationDate>2019-06-25UTC18:06:130</LastModificationDate>
+				<StartDate>2019-06-29UTC13:06:060</StartDate>
+				<EndDate>2019-06-30UTC00:06:000</EndDate>
+				<LastModificationDate>2019-06-29UTC13:06:060</LastModificationDate>
 				<Status>1</Status>
 				<Action>1</Action>
-				<SupplierId>A000000000</SupplierId>
+				<SupplierId>V123456</SupplierId>
 				<SupplierName>A000000000</SupplierName>
 				<PostedBy>
 					<Contact>
-						<Company>Muster Jobbörse Firma GMBH</Company>
-						<Salutation>1</Salutation>
+						<Company>V123456</Company>
+						<Salutation>Herr</Salutation>
 						<Title/>
-						<GivenName>Jobbörse Contact Firstname</GivenName>
- 						<FamilyName>Jobbörse Contact Lastname</FamilyName>
-						<PositionTitle>Contact Person</PositionTitle>
+						<GivenName>Max</GivenName>
+ 						<FamilyName>Mustermann</FamilyName>
+						<PositionTitle/>
 						<PostalAddress>
 							<CountryCode>DE</CountryCode>
-							<PostalCode>79111</PostalCode>
-							<Municipality>Lörrach</Municipality>
+							<PostalCode>33333</PostalCode>
+							<Municipality>Musterstadt</Municipality>
 							<Region>1</Region>
  							<StreetName>Musterstrasse 3</StreetName>
  						</PostalAddress>
 						<VoiceNumber>
 							<IntlCode>+49</IntlCode>
-							<AreaCode>176</AreaCode>
-							<TelNumber>33322444</TelNumber>
+							<AreaCode>333</AreaCode>
+							<TelNumber>333333333</TelNumber>
 						</VoiceNumber>
-						<EMail>support@musterjobboerse.de</EMail>
-						<JobContactWebSite>http://musterjobboerse.de</JobContactWebSite>
+						<EMail>test@test.com</EMail>
+						<JobContactWebSite>http://test.com</JobContactWebSite>
 					</Contact>
 				</PostedBy>
 				<BASupervision>0</BASupervision>
@@ -96,8 +96,8 @@
 					</JobPositionLocation>
 					<Application>
 						<KindOfApplication>3</KindOfApplication>
-						<ApplicationStartDate>2019-06-25</ApplicationStartDate>
-						<ApplicationEndDate>2019-06-26</ApplicationEndDate>
+						<ApplicationStartDate>2019-06-29</ApplicationStartDate>
+						<ApplicationEndDate>2019-06-30</ApplicationEndDate>
 						<EnclosuresRequired>Please with CV sending</EnclosuresRequired>
 					</Application>
  					<MiniJob>1</MiniJob>
@@ -107,7 +107,7 @@
 						</Schedule>
 						<Duration>
 							<TermLength>24</TermLength>
-							<TermDate>2020-06-25</TermDate>
+							<TermDate>2020-06-29</TermDate>
  						</Duration>
 					</Classification>
 				</JobPositionDescription>
@@ -138,8 +138,8 @@
 					<Handicap>1</Handicap>
 				</JobPositionRequirements>
 				<NumberToFill>33</NumberToFill>
-				<AssignmentStartDate>2019-06-25</AssignmentStartDate>
-				<AssignmentEndDate>2019-07-25</AssignmentEndDate>
+				<AssignmentStartDate>2019-06-29</AssignmentStartDate>
+				<AssignmentEndDate>2019-07-29</AssignmentEndDate>
 			</JobPositionInformation>
 		</JobPositionPosting>
 		<DeleteEntry>
