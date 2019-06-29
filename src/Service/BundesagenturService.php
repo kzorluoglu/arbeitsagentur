@@ -15,6 +15,9 @@ class BundesagenturService
     /** @var string */
     private $uploadUrl;
 
+    /** @var JobInterface */
+    private $job;
+
     public function __construct()
     {
         $this->uploadUrl = 'https://hrbaxml.arbeitsagentur.de/in/upload.php?upload=';

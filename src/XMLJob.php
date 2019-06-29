@@ -8,9 +8,14 @@ use kzorluoglu\Arbeitsagentur\Contract\RemoteInterface;
 
 class XMLJob extends Job implements JobInterface
 {
+
     /** @var string */
     private $filePath;
 
+    /** @var string */
+    private $filename;
+
+    /** @var string */
     private $xml;
 
     public function generateXML()
@@ -58,8 +63,8 @@ class XMLJob extends Job implements JobInterface
 				</Contact>
 			</HiringOrg>
 			<PostDetail>
-				<StartDate>{$this->PostStartDate->format('Y-m-dTH:m:sZ')}</StartDate>
-				<EndDate>{$this->PostEndDate->format('Y-m-dTH:m:sZ')}</EndDate>
+				<StartDate>{$this->PostStartDate}</StartDate>
+				<EndDate>{$this->PostEndDate}</EndDate>
 				<LastModificationDate>{$this->PostLastModificationDate->format('Y-m-dTH:m:sZ')}</LastModificationDate>
 				<Status>{$this->Status}</Status>
 				<Action>{$this->Action}</Action>
@@ -114,8 +119,8 @@ class XMLJob extends Job implements JobInterface
 					</JobPositionLocation>
 					<Application>
 						<KindOfApplication>{$this->Job_KindOfApplication}</KindOfApplication>
-						<ApplicationStartDate>{$this->Job_ApplyStartDate->format('Y-m-d')}</ApplicationStartDate>
-						<ApplicationEndDate>{$this->Job_ApplyEndDate->format('Y-m-d')}</ApplicationEndDate>
+						<ApplicationStartDate>{$this->Job_ApplyStartDate}</ApplicationStartDate>
+						<ApplicationEndDate>{$this->Job_ApplyEndDate}</ApplicationEndDate>
 						<EnclosuresRequired>{$this->Job_Enclosures}</EnclosuresRequired>
 					</Application>
  					<MiniJob>{$this->Job_MiniJob}</MiniJob>
@@ -125,7 +130,7 @@ class XMLJob extends Job implements JobInterface
 						</Schedule>
 						<Duration>
 							<TermLength>{$this->Job_TermLength}</TermLength>
-							<TermDate>{$this->Job_TermDate->format('Y-m-d')}</TermDate>
+							<TermDate>{$this->Job_TermDate}</TermDate>
  						</Duration>
 					</Classification>
 				</JobPositionDescription>
@@ -156,13 +161,10 @@ class XMLJob extends Job implements JobInterface
 					<Handicap>{$this->Job_Handicap}</Handicap>
 				</JobPositionRequirements>
 				<NumberToFill>{$this->Job_NumberToFill}</NumberToFill>
-				<AssignmentStartDate>{$this->Job_AssignmentStartDate->format('Y-m-d')}</AssignmentStartDate>
-				<AssignmentEndDate>{$this->Job_AssignmentEndDate->format('Y-m-d')}</AssignmentEndDate>
+				<AssignmentStartDate>{$this->Job_AssignmentStartDate}</AssignmentStartDate>
+				<AssignmentEndDate>{$this->Job_AssignmentEndDate}</AssignmentEndDate>
 			</JobPositionInformation>
 		</JobPositionPosting>
-		<DeleteEntry>
-			<EntryId>a</EntryId>
-		</DeleteEntry>
 	</Data>
 </HRBAXMLJobPositionPosting>
 XML;
@@ -173,7 +175,7 @@ XML;
     protected function save()
     {
         $xmlObject = new \SimpleXMLElement($this->xml);
-        $xmlObject->asXML($this->filePath);
+        return $xmlObject->asXML($this->filePath . $this->filename);
     }
 
     public function generate()
@@ -181,9 +183,11 @@ XML;
         if (!isset($this->filePath)) {
             throw new \Exception('XML File Path not setted');
         }
-
+        if (!isset($this->filename)) {
+            throw new \Exception('XML Filename not setted');
+        }
         $this->generateXML();
-        $this->save();
+        return $this->save();
     }
 
     /**
@@ -196,7 +200,7 @@ XML;
 
     public function getXMLFile()
     {
-        return file_exists($this->filePath) ? file_get_contents($this->filePath) : false;
+        return file_exists($this->getFilePath() . $this->getFilename()) ? file_get_contents($this->getFilePath() . $this->getFilename()) : false;
     }
 
     /**
@@ -213,6 +217,22 @@ XML;
     public function setFilePath($filePath)
     {
         $this->filePath = $filePath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    /**
+     * @param string $filename
+     */
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
     }
 
 }

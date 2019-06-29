@@ -80,8 +80,8 @@ class JobTest extends TestCase
         $job->EMail = $company->getEMail();
         $job->GeneralWebSite = $company->getGeneralWebSite();
 
-        $job->PostStartDate = new \DateTime('now'); // Date for offer show
-        $job->PostEndDate = new \DateTime('tomorrow');             // Date for offer end
+        $job->PostStartDate = time();
+        $job->PostEndDate = time();
         $job->PostLastModificationDate = new \DateTime('now');  // Date for offer modification
         $job->Status = 1;             // Share public  // Select
         $job->Action = 1;             // Insert new offer  // Select
@@ -102,16 +102,15 @@ class JobTest extends TestCase
         $job->Job_StreetName = "Musterstraße 3";
 
         $job->Job_KindOfApplication = 3;  // Select
-        $job->Job_ApplyStartDate = new \DateTime('now');
-        $job->Job_ApplyEndDate = new \DateTime('tomorrow');
+        $job->Job_ApplyStartDate = time();
+        $job->Job_ApplyEndDate = time();
         $job->Job_Enclosures = "Please with CV sending";
 
         $job->Job_MiniJob = 1;  // Select
         $job->Job_WorkingPlan = 1;  // Select
 
         $job->Job_TermLength = 24; // Month Count
-        $job->Job_TermDate = new \DateTime('now');
-        $job->Job_TermDate->modify('+1 year');
+        $job->Job_TermDate = time();
 
         $job->Job_EduDegree = 2; // Select
         $job->Job_EduDegreeRequired = 1; // Select
@@ -129,9 +128,8 @@ class JobTest extends TestCase
         $job->Job_Handicap = 1; // Select
         $job->Job_NumberToFill = 33;
 
-        $job->Job_AssignmentStartDate = new \DateTime('now');
-        $job->Job_AssignmentEndDate = new \DateTime('now');
-        $job->Job_AssignmentEndDate->modify('+30 Day');
+        $job->Job_AssignmentStartDate = time();
+        $job->Job_AssignmentEndDate = time();
         return $job;
     }
 
@@ -139,10 +137,12 @@ class JobTest extends TestCase
     {
         $company = $this->getCompany();
         $xmlJob = $this->getXMLJob($company);
-        $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
+        $xmlJob->setFilePath(__DIR__ . '\\');
+        $xmlJob->setFilename('unittest.xml');
 
         $this->bundesagenturService = new BundesagenturService();
         $this->bundesagenturService->setJob($xmlJob);
+
         $jobs = $this->bundesagenturService->generate()->getAll();
 
         $this->assertSame($jobs, $xmlJob->getXMLFile());
@@ -152,8 +152,11 @@ class JobTest extends TestCase
     {
         $company = $this->getCompany();
         $xmlJob = $this->getXMLJob($company);
-        $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
+        $xmlJob->setFilePath(__DIR__ . '\\');
+        $xmlJob->setFilename('unittest.xml');
+
         $this->bundesagenturService = new BundesagenturService();
+
         $this->bundesagenturService->setCompany($company);
         $this->bundesagenturService->setJob($xmlJob);
 
@@ -164,12 +167,15 @@ class JobTest extends TestCase
     {
         $company = $this->getCompany();
         $xmlJob = $this->getXMLJob($company);
-        $xmlJob->setFilePath(__DIR__ . '\\unittest.xml');
+        $xmlJob->setFilePath(__DIR__ . '\\');
+        $xmlJob->setFilename('unittest.xml');
 
         $this->bundesagenturService = new BundesagenturService();
+
         $this->bundesagenturService->setCompany($company);
         $this->bundesagenturService->setJob($xmlJob);
         $status = $this->bundesagenturService->upload();
+
         $this->assertSame($status, 'could not load PEM client certificate, OpenSSL error error:02001002:system library:fopen:No such file or directory, (no key found, wrong pass phrase, or wrong file format?)');
     }
 
