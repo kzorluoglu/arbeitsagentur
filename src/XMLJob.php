@@ -9,18 +9,18 @@ use kzorluoglu\Arbeitsagentur\Contract\RemoteInterface;
 class XMLJob extends Job implements JobInterface
 {
 
-    /** @var string */
-    private $filePath;
+	/** @var string */
+	private $filePath;
 
-    /** @var string */
-    private $filename;
+	/** @var string */
+	private $filename;
 
-    /** @var string */
-    private $xml;
+	/** @var string */
+	private $xml;
 
-    public function generateXML()
-    {
-        $this->xml = <<<XML
+	public function generateXML()
+	{
+		$this->xml = <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <HRBAXMLJobPositionPosting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
 	<Header>
@@ -170,69 +170,69 @@ class XMLJob extends Job implements JobInterface
 XML;
 
 
-    }
+	}
 
-    protected function save()
-    {
-        $xmlObject = new \SimpleXMLElement($this->xml);
-        return $xmlObject->asXML($this->filePath . $this->filename);
-    }
+	protected function save()
+	{
+		$xmlObject = new \SimpleXMLElement($this->xml);
+		return $xmlObject->asXML($this->filePath . $this->filename);
+	}
 
-    public function generate()
-    {
-        if (!isset($this->filePath)) {
-            throw new \Exception('XML File Path not setted');
-        }
-        if (!isset($this->filename)) {
-            throw new \Exception('XML Filename not setted');
-        }
-        $this->generateXML();
-        return $this->save();
-    }
+	public function generate()
+	{
+		if (!isset($this->filePath)) {
+			throw new \Exception('XML File Path not setted');
+		}
+		if (!isset($this->filename)) {
+			throw new \Exception('XML Filename not setted');
+		}
+		$this->generateXML();
+		return $this->save();
+	}
 
-    /**
-     * @return mixed false|string
-     */
-    public function getAll()
-    {
-        return $this->getXMLFile();
-    }
+	/**
+	 * @return mixed false|string
+	 */
+	public function getAll()
+	{
+		return $this->getXMLFile();
+	}
 
-    public function getXMLFile()
-    {
-        return file_exists($this->getFilePath() . $this->getFilename()) ? file_get_contents($this->getFilePath() . $this->getFilename()) : false;
-    }
+	public function getXMLFile()
+	{
+		return file_exists($this->getFilePath() . $this->getFilename()) ? file_get_contents($this->getFilePath() . $this->getFilename()) : false;
+	}
 
-    /**
-     * @return string
-     */
-    public function getFilePath()
-    {
-        return $this->filePath;
-    }
+	/**
+	 * @return string
+	 */
+	public function getFilePath()
+	{
+		return $this->filePath;
+	}
 
-    /**
-     * @param string $filePath
-     */
-    public function setFilePath($filePath)
-    {
-        $this->filePath = $filePath;
-    }
+	/**
+	 * @param string $filePath
+	 */
+	public function setFilePath($filePath)
+	{
+		$this->filePath = $filePath;
+	}
 
-    /**
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->filename;
-    }
+	/**
+	 * @return string
+	 */
+	public function getFilename()
+	{
+		return $this->filename;
+	}
 
-    /**
-     * @param string $filename
-     */
-    public function setFilename($filename)
-    {
-        $this->filename = $filename;
-    }
+	/**
+	 * @param string $filename
+	 */
+	public function setFilename($filename)
+	{
+		$this->filename = $filename;
+	}
 
 }

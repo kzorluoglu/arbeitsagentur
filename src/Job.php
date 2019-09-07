@@ -72,20 +72,20 @@ use DateTime;
  */
 class Job
 {
-    private $attribute = array();
+	private $attribute = array();
 
-    public function __get($name)
-    {
-        if (array_key_exists($name, $this->attribute)) {
-            return $this->attribute[$name];
-        }
+	public function __get($name)
+	{
+		if (array_key_exists($name, $this->attribute)) {
+			return $this->attribute[$name];
+		}
 
-        return null;
-    }
+		return null;
+	}
 
-    public function __set($name, $value)
-    {
+	public function __set($name, $value)
+	{
 
-        $this->attribute[$name] = $value;
-    }
+		$this->attribute[$name] = $value;
+	}
 }
