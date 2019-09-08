@@ -1,5 +1,5 @@
 # Arbeitsagentur API SDK
-*unoffical* SDK Library of HR BA XML API in Job to create/delete Jobs and another actions. 
+*unoffical* SDK Library of HR BA XML API in Job to create/delete Jobs and another actions.
 
 ## Requirements
  - PHP 7.2 or higher
@@ -100,7 +100,7 @@ and create JobService for XMLJOB
     }
 
 ```
- 
+
 ## Installation
 
 ### Composer
@@ -112,8 +112,10 @@ composer require kzorluoglu/arbeitsagentur
 Import the .SQL files from 'sql' folder.
 
 ## TODO
+- Job
+    - setReport($report) Save the Report after Upload Action
 - XMLJob
-    - Dynamic Filename with Arbeitsagentur Format  (ABCCCCCCCCCC_DDDD-DD-DD_DD-DD-DD_ESSSS.HHH) 
+    - Dynamic Filename with Arbeitsagentur Format  (ABCCCCCCCCCC_DDDD-DD-DD_DD-DD-DD_ESSSS.HHH)
     ![Alt text](todo/XMLFileName.png?raw=true "Title")
 - ~~JobService Class~~
     - ~~Upload Method Implementing, like setRemote(RemoteInterface $remote)->upload()~~
