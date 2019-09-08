@@ -5,6 +5,10 @@
  - PHP 7.2 or higher
 
 ## How to Use
+- Please first read this Rules for the Filename.
+    - Dynamic Filename with Arbeitsagentur Format (ABCCCCCCCCCC_DDDD-DD-DD_DD-DD-DD_ESSSS.HHH)
+![Alt text](todo/XMLFileName.png?raw=true "Title")
+
 create Job Class with your Information
 ```
 use kzorluoglu\Arbeitsagentur\XMLJob;
@@ -114,8 +118,8 @@ Import the .SQL files from 'sql' folder.
 ## TODO
 - Job
     - setReport($report) Save the Report after Upload Action
-- XMLJob
-    - Dynamic Filename with Arbeitsagentur Format  (ABCCCCCCCCCC_DDDD-DD-DD_DD-DD-DD_ESSSS.HHH)
+- ~~XMLJob~~
+    - ~~Dynamic Filename with Arbeitsagentur Format  (ABCCCCCCCCCC_DDDD-DD-DD_DD-DD-DD_ESSSS.HHH)~~
     ![Alt text](todo/XMLFileName.png?raw=true "Title")
 - ~~JobService Class~~
     - ~~Upload Method Implementing, like setRemote(RemoteInterface $remote)->upload()~~
