@@ -58,18 +58,17 @@ class BundesagenturService
 	{
 		$fp = fopen($this->job->getFilePath() . '/log.txt', 'w');
 		$cfile = new \CURLFile($this->job->getFilePath() . $this->job->getFilename());
-
+		
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $this->uploadUrl);
 		// The --cert option
-		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_SSLCERT, $this->company->getCertificateFile());
 		curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->company->getPIN());
 		curl_setopt($ch, CURLOPT_POST, true); // enable posting
 		curl_setopt($ch, CURLOPT_POSTFIELDS, array('upload' => $cfile));
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // if any redirection after upload
 		curl_setopt($ch, CURLOPT_VERBOSE, 1);
-		curl_setopt($ch, CURLOPT_STDERR, $fp);
+		curl_setopt($ch, CURLOPT_FILE, $fp);
 
 		$result = curl_exec($ch);
 		// also get the error and response code
@@ -77,10 +76,13 @@ class BundesagenturService
 		$response = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 
-		if (isset($errors)) {
+		if (!empty($errors)) {
 			throw new \Exception($errors);
 		}
-		return $response;
+
+		if($response === 200){
+			return true;
+		}
 	}
 
 
