@@ -6,6 +6,7 @@ namespace kzorluoglu\Arbeitsagentur;
 use DateTime;
 
 /**
+ * @property int PdfPreview
  * @property string SupplierId
  * @property string SupplierName
  * @property DateTime Timestamp

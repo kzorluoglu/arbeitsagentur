@@ -18,6 +18,9 @@ class XMLJob extends Job implements JobInterface
 	/** @var string */
 	private $xml;
 
+	// 						<PostalCode>{$this->PostalCode}</PostalCode>
+
+
 	public function generateXML()
 	{
 		$this->xml = <<<XML
@@ -25,10 +28,11 @@ class XMLJob extends Job implements JobInterface
 <HRBAXMLJobPositionPosting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
 	<Header>
 		<SupplierId>{$this->SupplierId}</SupplierId>
-		<Timestamp>{$this->Timestamp->format('Y-m-dTH:m:sZ')}</Timestamp>
+		<Timestamp>{$this->Timestamp->format('Y-m-d\TH:i:s\Z')}</Timestamp>
 		<Amount>0</Amount>
 		<TypeOfLoad>F</TypeOfLoad>
-	</Header>
+		<PdfPreviewOnly>{$this->PdfPreview}</PdfPreviewOnly>
+	</Header> 
 	<Data>
 		<JobPositionPosting>
 			<JobPositionPostingId>{$this->JobID}</JobPositionPostingId>
@@ -49,7 +53,6 @@ class XMLJob extends Job implements JobInterface
 					<PostalAddress>
 						<CountryCode>{$this->CountryCode}</CountryCode>
 						<Region>{$this->Region}</Region>
-						<PostalCode>{$this->PostalCode}</PostalCode>
 						<Municipality>{$this->Municipality}</Municipality>
 						<StreetName>{$this->StreetName}</StreetName>
  					</PostalAddress>
@@ -63,9 +66,9 @@ class XMLJob extends Job implements JobInterface
 				</Contact>
 			</HiringOrg>
 			<PostDetail>
-				<StartDate>{$this->PostStartDate}</StartDate>
-				<EndDate>{$this->PostEndDate}</EndDate>
-				<LastModificationDate>{$this->PostLastModificationDate->format('Y-m-dTH:m:sZ')}</LastModificationDate>
+				<StartDate>{$this->PostStartDate->format('Y-m-d')}</StartDate>
+				<EndDate>{$this->PostEndDate->format('Y-m-d')}</EndDate>
+				<LastModificationDate>{$this->PostLastModificationDate->format('Y-m-d\TH:i:s\Z')}</LastModificationDate>
 				<Status>{$this->Status}</Status>
 				<Action>{$this->Action}</Action>
 				<SupplierId>{$this->SupplierId}</SupplierId>
@@ -80,9 +83,8 @@ class XMLJob extends Job implements JobInterface
 						<PositionTitle>{$this->PositionTitle}</PositionTitle>
 						<PostalAddress>
 							<CountryCode>{$this->CountryCode}</CountryCode>
-							<PostalCode>{$this->PostalCode}</PostalCode>
-							<Municipality>{$this->Municipality}</Municipality>
 							<Region>{$this->Region}</Region>
+							<Municipality>{$this->Municipality}</Municipality>
  							<StreetName>{$this->StreetName}</StreetName>
  						</PostalAddress>
 						<VoiceNumber>
@@ -119,8 +121,8 @@ class XMLJob extends Job implements JobInterface
 					</JobPositionLocation>
 					<Application>
 						<KindOfApplication>{$this->Job_KindOfApplication}</KindOfApplication>
-						<ApplicationStartDate>{$this->Job_ApplyStartDate}</ApplicationStartDate>
-						<ApplicationEndDate>{$this->Job_ApplyEndDate}</ApplicationEndDate>
+						<ApplicationStartDate>{$this->Job_ApplyStartDate->format('Y-m-d')}</ApplicationStartDate>
+						<ApplicationEndDate>{$this->Job_ApplyEndDate->format('Y-m-d')}</ApplicationEndDate>
 						<EnclosuresRequired>{$this->Job_Enclosures}</EnclosuresRequired>
 					</Application>
  					<MiniJob>{$this->Job_MiniJob}</MiniJob>

@@ -15,9 +15,13 @@ class BundesagenturService
 	/** @var string */
 	private $uploadUrl;
 
+	/** @var string */
+	private $apiUrl;
+
 	public function __construct()
 	{
 		$this->uploadUrl = 'https://hrbaxml.arbeitsagentur.de/in/upload.php';
+		$this->apiUrl = 'https://hrbaxml.arbeitsagentur.de/';
 	}
 
 	/**
@@ -58,7 +62,7 @@ class BundesagenturService
 	{
 		$fp = fopen($this->job->getFilePath() . '/log.txt', 'w');
 		$cfile = new \CURLFile($this->job->getFilePath() . $this->job->getFilename());
-		
+
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $this->uploadUrl);
 		// The --cert option
@@ -83,6 +87,34 @@ class BundesagenturService
 		if($response === 200){
 			return true;
 		}
+	}
+
+	/**
+	 * @param string $fileName Full File name job.xml
+	 */
+	public function report($fileName)
+	{
+
+		$report = 'E'.substr($fileName, 1);
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $this->apiUrl.$report);
+		// The --cert option
+		curl_setopt($ch, CURLOPT_SSLCERT, $this->company->getCertificateFile());
+		curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->company->getPIN());
+		curl_setopt($ch, CURLOPT_VERBOSE, 0);   
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+		$result = curl_exec($ch);
+		$response = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		curl_close($ch);
+
+		if($response === 200){
+			return $result;
+
+		}
+
 	}
 
 
