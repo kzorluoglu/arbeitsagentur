@@ -90,7 +90,7 @@ class BundesagenturService
 	}
 
 	/**
-	 * @param string $fileName Full File name job.xml
+	 * @param string $fileName Full File name for example DSV03333333_2019-09-23_14-53-06.xml
 	 */
 	public function report($fileName)
 	{

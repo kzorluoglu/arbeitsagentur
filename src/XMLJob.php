@@ -20,7 +20,6 @@ class XMLJob extends Job implements JobInterface
 
 	// 						<PostalCode>{$this->PostalCode}</PostalCode>
 
-
 	public function generateXML()
 	{
 		$this->xml = <<<XML
@@ -29,7 +28,7 @@ class XMLJob extends Job implements JobInterface
 	<Header>
 		<SupplierId>{$this->SupplierId}</SupplierId>
 		<Timestamp>{$this->Timestamp->format('Y-m-d\TH:i:s\Z')}</Timestamp>
-		<Amount>0</Amount>
+		<Amount>1</Amount>
 		<TypeOfLoad>F</TypeOfLoad>
 		<PdfPreviewOnly>{$this->PdfPreview}</PdfPreviewOnly>
 	</Header> 

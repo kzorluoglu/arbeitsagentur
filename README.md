@@ -14,6 +14,7 @@ $xmlJob->setFileFullPath(__DIR__.'\\unittest.xml');
 
 $xmlJob->SupplierId = 'A000000000';
 $xmlJob->Timestamp = new \DateTime('now');
+$xmlJob->PdfPreview = '1';
 $xmlJob->Amount = '1';
 $xmlJob->TypeOfLoad = '1';
 $xmlJob->JobPositionPostingId = '1';
