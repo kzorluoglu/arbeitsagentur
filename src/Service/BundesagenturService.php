@@ -60,6 +60,7 @@ class BundesagenturService
 
 	public function upload()
 	{
+		return true;
 		$fp = fopen($this->job->getFilePath() . '/log.txt', 'w');
 		$cfile = new \CURLFile($this->job->getFilePath() . $this->job->getFilename());
 
@@ -90,29 +91,30 @@ class BundesagenturService
 	}
 
 	/**
-	 * @param string $fileName Full File name for example DSV03333333_2019-09-23_14-53-06.xml
+	 * @param string $fileName Full File name
 	 */
-	public function report($fileName)
+	public function downloadFile($fileName)
 	{
 
-		$report = 'E'.substr($fileName, 1);
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $this->apiUrl.$report);
+		curl_setopt($ch, CURLOPT_URL, $this->apiUrl.$fileName);
 		// The --cert option
 		curl_setopt($ch, CURLOPT_SSLCERT, $this->company->getCertificateFile());
 		curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $this->company->getPIN());
-		curl_setopt($ch, CURLOPT_VERBOSE, 0);   
-		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_VERBOSE, 0);
 
 		$result = curl_exec($ch);
 		$response = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 		curl_close($ch);
-
 		if($response === 200){
-			return $result;
-
+			$fp = fopen (TL_ROOT . '/jobcenter/' . $fileName, 'w+') or die('Unable to write a file');
+			fputs($fp, $result);
+			fclose($fp);
+			return true;
+		}else{
+			return false;
 		}
 
 	}

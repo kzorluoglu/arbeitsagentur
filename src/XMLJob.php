@@ -18,8 +18,55 @@ class XMLJob extends Job implements JobInterface
 	/** @var string */
 	private $xml;
 
-	// 						<PostalCode>{$this->PostalCode}</PostalCode>
+	public function getCompanyIndustry()
+	{
 
+		if($this->HiringCompanyIndustry){
+			return "
+			<Industry>
+				<NAICS>{$this->HiringCompanyIndustry}</NAICS>
+			</Industry>";
+		}
+
+		return;
+	}
+
+	public function getJobDurationFields(){
+
+		$string = "";
+		if($this->Job_TemporaryOrRegular == "1" | "3"){
+			$string = "
+			<TermLength>{$this->Job_TermLength}</TermLength>
+			<TermDate>{$this->Job_TermDate}</TermDate>
+			<TemporaryOrRegular>{$this->Job_TemporaryOrRegular}</TemporaryOrRegular>
+			";
+		}
+
+		if($this->Job_TemporaryOrRegular == "2"){
+			$string = "
+			<TemporaryOrRegular>{$this->Job_TemporaryOrRegular}</TemporaryOrRegular>
+			";
+		}
+		return $string;
+	}
+
+	public function getEducationFields(){
+		$string = "";
+		if($this->Job_EduDegree){
+			$string .= "<EduDegree>{$this->Job_EduDegree}</EduDegree>";
+		}
+		if($this->Job_EduDegreeRequired){
+			$string .= "<EduDegreeRequired>{$this->Job_EduDegreeRequired}</EduDegreeRequired>";
+		}
+
+		return $string;
+	}
+
+	public function getHandicap(){
+		if($this->Job_Handicap){
+		return "<Handicap>{$this->Job_Handicap}</Handicap>";
+		}
+	}
 	public function generateXML()
 	{
 		$this->xml = <<<XML
@@ -31,7 +78,7 @@ class XMLJob extends Job implements JobInterface
 		<Amount>1</Amount>
 		<TypeOfLoad>F</TypeOfLoad>
 		<PdfPreviewOnly>{$this->PdfPreview}</PdfPreviewOnly>
-	</Header> 
+	</Header>
 	<Data>
 		<JobPositionPosting>
 			<JobPositionPostingId>{$this->JobID}</JobPositionPostingId>
@@ -41,9 +88,7 @@ class XMLJob extends Job implements JobInterface
 				<HiringOrgId>{$this->HiringCompanyID}</HiringOrgId>
 				<ProfileWebSite>{$this->HiringCompanyWebpage}</ProfileWebSite>
 				<HiringOrgSize>{$this->HiringCompanySize}</HiringOrgSize>
-				<Industry>
-					<NAICS>{$this->HiringCompanyIndustry}</NAICS>
-				</Industry>
+				{$this->getCompanyIndustry()}
 				<Contact>
 					<Salutation>{$this->Salutation}</Salutation>
 					<GivenName>{$this->GivenName}</GivenName>
@@ -51,6 +96,7 @@ class XMLJob extends Job implements JobInterface
 					<PositionTitle>{$this->PositionTitle}</PositionTitle>
 					<PostalAddress>
 						<CountryCode>{$this->CountryCode}</CountryCode>
+						<PostalCode>{$this->PostalCode}</PostalCode>
 						<Region>{$this->Region}</Region>
 						<Municipality>{$this->Municipality}</Municipality>
 						<StreetName>{$this->StreetName}</StreetName>
@@ -82,6 +128,7 @@ class XMLJob extends Job implements JobInterface
 						<PositionTitle>{$this->PositionTitle}</PositionTitle>
 						<PostalAddress>
 							<CountryCode>{$this->CountryCode}</CountryCode>
+							<PostalCode>{$this->PostalCode}</PostalCode>
 							<Region>{$this->Region}</Region>
 							<Municipality>{$this->Municipality}</Municipality>
  							<StreetName>{$this->StreetName}</StreetName>
@@ -130,21 +177,21 @@ class XMLJob extends Job implements JobInterface
 							<WorkingPlan>{$this->Job_WorkingPlan}</WorkingPlan>
 						</Schedule>
 						<Duration>
-							<TermLength>{$this->Job_TermLength}</TermLength>
-							<TermDate>{$this->Job_TermDate}</TermDate>
+							{$this->getJobDurationFields()}
  						</Duration>
 					</Classification>
 				</JobPositionDescription>
 				<JobPositionRequirements>
 					<QualificationsRequired>
 						<EducationQualifs>
-							<EduDegree>{$this->Job_EduDegree}</EduDegree>
-							<EduDegreeRequired>{$this->Job_EduDegreeRequired}</EduDegreeRequired>
+						{$this->getEducationFields()}
 						</EducationQualifs>
-						<Language>
-						<LanguageName>{$this->Job_LanguageName}</LanguageName>
-						<LanguageLevel>{$this->Job_LanguageLevel}</LanguageLevel>
-                        </Language>
+						<LanguageQualifs>
+							<Language>
+								<LanguageName>{$this->Job_LanguageName}</LanguageName>
+								<LanguageLevel>{$this->Job_LanguageLevel}</LanguageLevel>
+                        	</Language>
+						</LanguageQualifs>
 						<SkillQualifs>
 							<HardSkill>
 								<SkillName>{$this->Job_SkillName}</SkillName>
@@ -159,11 +206,12 @@ class XMLJob extends Job implements JobInterface
 						</Mobility>
 					</QualificationsRequired>
  					<TravelRequired>{$this->Job_TravelRequired}</TravelRequired>
-					<Handicap>{$this->Job_Handicap}</Handicap>
+					{$this->getHandicap()}
+
 				</JobPositionRequirements>
 				<NumberToFill>{$this->Job_NumberToFill}</NumberToFill>
-				<AssignmentStartDate>{$this->Job_AssignmentStartDate}</AssignmentStartDate>
-				<AssignmentEndDate>{$this->Job_AssignmentEndDate}</AssignmentEndDate>
+				<AssignmentStartDate>{$this->Job_AssignmentStartDate->format('Y-m-d')}</AssignmentStartDate>
+				<AssignmentEndDate>{$this->Job_AssignmentEndDate->format('Y-m-d')}</AssignmentEndDate>
 			</JobPositionInformation>
 		</JobPositionPosting>
 	</Data>

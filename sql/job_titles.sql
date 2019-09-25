@@ -3,6 +3,7 @@ CREATE TABLE `job_titles` (
   `jobid` text NOT NULL,
   `title` text NOT NULL
 ) COLLATE 'utf8_general_ci';
+
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('15339', 'Offizier - Militärfachlicher Dienst');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('15341', 'Offizier - Truppendienst');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('15345', 'Offizier - Sanitätsdienst');
