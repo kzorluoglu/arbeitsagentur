@@ -1,6 +1,7 @@
 .idea
 .phpunit.result.cache
 .env
+.history
 
 # Composer
 /vendor
