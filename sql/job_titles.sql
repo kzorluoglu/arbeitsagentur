@@ -5087,7 +5087,7 @@ INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('94964', 'Bachelor of Enginee
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('96892', 'Bachelor of Engineering - Werkstofftechnik');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('100469', 'Bachelor of Science - Biomaterial Science');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('98281', 'Bachelor of Science - Dentaltechnologie');
-INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('97913', 'Bachelor of Science - École Europ. d'Ing. en Génie des Mat.');
+INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('97913', 'Bachelor of Science - École Europ. d\'Ing. en Génie des Mat.');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('98861', 'Bachelor of Science - Materialwissenschaft');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('97190', 'Bachelor of Science - Materialwissenschaft und Maschinenbau');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('99239', 'Bachelor of Science - Materialwiss. u. Werkstofftechnik');
@@ -5122,7 +5122,7 @@ INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('96510', 'Master of Science -
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('95634', 'Master of Science - Angewandte Werkstoffwissenschaften');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('99178', 'Master of Science - Computergestützte Materialwissenschaft');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('99719', 'Master of Science - Comput. Mech. of Materials and Struct.');
-INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('96231', 'Master of Science - École Europ. d'Ingén. en Génie d. Matér.');
+INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('96231', 'Master of Science - École Europ. d\'Ingén. en Génie d. Matér.');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('98583', 'Master of Science - Materialchemie und Katalyse');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('98023', 'Master of Science - Materials Science');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('94917', 'Master of Science - Materials Science and Engineering');
@@ -7341,7 +7341,7 @@ INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('10027', 'Rooms-Division-Mana
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('59197', 'Betriebswirt/in (Hochschule) - Hotelmanagement');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('14520', 'Betriebsleiter/in - Hotel/Gaststätten');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('10086', 'Helfer/in - Gastgewerbe');
-INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('10032', 'Demichef d'étage');
+INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('10032', 'Demichef d\'étage');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('10041', 'Demichef de rang');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('10044', 'Oberkellner/in');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('10050', 'Etagenkellner/in');
@@ -12965,7 +12965,7 @@ INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('129895', 'Master of Science 
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130662', 'Bachelor of Arts - Nachh. Soz.politik - Gesell.,Wirt.,Komm.');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130663', 'Bachelor of Arts - Angewandte Sozialwissenschaften');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130664', 'Bachelor of Arts - Sozialwissenschaften in Europa');
-INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130666', 'Master of Arts - Childhood Studies and Children's Rights');
+INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130666', 'Master of Arts - Childhood Studies and Children\'s Rights');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130667', 'Master of Arts - Diversität und Inklusion');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130668', 'Master of Arts - Int. Relations and Cultural Diplomacy');
 INSERT INTO `job_titles` (`jobid`,`title`) VALUES ('130671', 'Master of Science - Demography and Social Inequality');

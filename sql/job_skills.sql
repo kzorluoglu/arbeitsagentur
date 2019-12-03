@@ -2777,7 +2777,7 @@ INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62876', 'Suppenzubereitung
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62877', 'Sushi-Zubereitung');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62878', 'Systemgastronomie');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62879', 'Vegetarische Küche');
-INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62880', 'Vorspeisen (Horsd'oeuvre) zubereiten');
+INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62880', 'Vorspeisen (Horsd\'oeuvre) zubereiten');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62881', 'Bulgarische Küche');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62882', 'Mediterrane Küche');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('62883', 'Afghanische Küche');
@@ -7185,7 +7185,7 @@ INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77761', 'Helikon');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77763', 'historische Frisuren');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77764', 'Kraftakrobatik');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77765', 'Farbberatung/Color-Matching');
-INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77767', 'Oboe d'amore');
+INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77767', 'Oboe d\'amore');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77768', 'Elegante Tagesgarderobe');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77770', 'Herstellungsleitung (Film, TV, Bühne)');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('77771', 'On-line-Schnitt');
@@ -7419,7 +7419,7 @@ INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78091', 'Revival-/Tribute-
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78092', 'Script');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78095', 'Synchronschnitt');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78097', 'Dokumentarfilm');
-INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78098', 'Viola d'amore');
+INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78098', 'Viola d\'amore');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78099', 'Bariton Lyrisch');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78100', 'Top 40 Coverband');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78101', 'Kombination (Hose/Sakko)');
@@ -7480,7 +7480,7 @@ INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78177', 'Folklore - Spanie
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78178', 'Soul');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78180', 'Barockbratsche');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78181', 'Folklore - Balkan');
-INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78182', 'Rock 'n Roll');
+INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78182', 'Rock \'n Roll');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78183', 'Katzenzucht/-haltung');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78184', 'Schalmeienzug');
 INSERT INTO `job_skills` (`skillid`,`title`) VALUES ('78185', 'Cimbasso');

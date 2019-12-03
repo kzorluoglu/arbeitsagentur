@@ -147,9 +147,9 @@ class XMLJob extends Job implements JobInterface
 			</PostDetail>
 			<JobPositionInformation>
 				<JobPositionTitle>
-					<Title>
-						<TitleCode>{$this->Job_TitleCode}</TitleCode>
-						<Degree>{$this->Job_Degree}</Degree>
+				<Title>
+					<TitleCode>{$this->Job_TitleCode}</TitleCode>
+					<Degree>{$this->Job_Degree}</Degree>
 					</Title>
 				</JobPositionTitle>
 				<JobPositionTitleDescription>{$this->Job_JobPositionTitle}</JobPositionTitleDescription>
